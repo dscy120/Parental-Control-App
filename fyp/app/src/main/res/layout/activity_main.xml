@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/MainBackground"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Main page"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.063" />
+
+    <Button
+        android:id="@+id/button_startTimer"
+        android:layout_width="329dp"
+        android:layout_height="81dp"
+        android:paddingLeft="30dip"
+        android:paddingRight="26dip"
+        android:background="@drawable/card_green"
+        android:drawableLeft="@drawable/sports_esports_black_18dp"
+        android:drawablePadding="2dip"
+        android:onClick="startTimerService"
+        android:text="Enjoy your leisure time!"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.109" />
+
+    <Button
+        android:id="@+id/button_adminLogin"
+        android:layout_width="329dp"
+        android:layout_height="81dp"
+        android:background="@drawable/card_green_3"
+        android:drawableLeft="@drawable/lock_24px"
+        android:drawablePadding="2dip"
+        android:paddingLeft="30dip"
+        android:paddingRight="26dip"
+        android:text="Parent Login"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_launchquiz"
+        app:layout_constraintVertical_bias="0.142" />
+
+    <Button
+        android:id="@+id/button_launchquiz"
+        android:layout_width="329dp"
+        android:layout_height="81dp"
+        android:paddingLeft="30dip"
+        android:paddingRight="26dip"
+        android:drawableLeft="@drawable/school_24px"
+        android:text="Quiz Library"
+        android:textAllCaps="false"
+        android:background="@drawable/card_green_2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_startTimer"
+        app:layout_constraintVertical_bias="0.077" />
+
+    <Button
+        android:id="@+id/button_launchReward"
+        android:layout_width="329dp"
+        android:layout_height="81dp"
+        android:paddingLeft="30dip"
+        android:paddingRight="26dip"
+        android:drawableLeft="@drawable/reward_24px"
+        android:drawablePadding="2dip"
+        android:text="Reward Store"
+        android:background="@drawable/card_green_4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_adminLogin"
+        app:layout_constraintVertical_bias="0.29" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

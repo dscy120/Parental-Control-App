@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.parentalapp">
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <application
+        android:name=".playground.ScreenTimeApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".reward.RewardMainActivity"></activity>
+        <activity android:name=".quiz.record.AttemptDetailActivity" />
+        <activity android:name=".quiz.QuizSelectionActivity" />
+        <activity android:name=".quiz.record.RecordMainActivity" />
+        <activity android:name=".quiz.question.questionFragment.QuizResultActivity" />
+        <activity android:name=".quiz.question.QuestionDisplayActivity" />
+        <activity android:name=".quiz.QuizMainActivity" />
+        <activity android:name=".admin.ParentActivity" />
+        <activity
+            android:name=".admin.AppRestrictActivity"
+            android:label="@string/title_activity_app_restrict" />
+        <activity android:name=".admin.PinActivity" />
+        <activity
+            android:name=".admin.GeneralSettingsActivity"
+            android:label="@string/title_activity_general_settings" />
+        <activity android:name=".playground.PlaygroundActivity" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service android:name=".playground.ScreenTimeService" />
+    </application>
+
+</manifest>
