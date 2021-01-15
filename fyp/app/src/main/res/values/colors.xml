@@ -4,4 +4,24 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="MainBackground">#00bfff</color>
+    
+    <color name="MainTheme_Blue_1">#0779e4</color>
+    <color name="MainTheme_Blue_2">#4cbbb9</color>
+    <color name="MainTheme_Blue_3">#77d8d8</color>
+    <color name="MainTheme_Green_1">#eff3c6</color>
+    
+    <color name="PlayGroundTheme_Green_1">#00af91</color>
+    <color name="PlayGroundTheme_Green_2">#007965</color>
+    <color name="PlayGroundTheme_Orange_1">#f58634</color>
+    <color name="PlayGroundTheme_Yellow_1">#f58634</color>
+    
+    <color name="QuizMainTheme_Green_1">#9ad3bc</color>
+    <color name="QuizMainTheme_Green_2">#f3eac2</color>
+    <color name="QuizMainTheme_Orange_1">#f5b461</color>
+    <color name="QuizMainTheme_Red_1">#ec524b</color>
+    
+    <color name="AdminMainTheme_Red_1">#ff7b54</color>
+    <color name="AdminMainTheme_Orange_1">#ffb26b</color>
+    <color name="AdminMainTheme_Yellow_1">#ffd56b</color>
+    <color name="AdminMainTheme_Green_1">#939b62</color>
 </resources>
