@@ -9,13 +9,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.parentalapp.R;
 import com.example.parentalapp.quiz.DatabaseOpenHelper;
 import com.example.parentalapp.quiz.question.questionFragment.FragmentListener;
 import com.example.parentalapp.quiz.question.questionFragment.QuestionFragment;
-import com.example.parentalapp.quiz.question.questionFragment.QuizResultActivity;
 
 import java.util.Collections;
 import java.util.List;
@@ -168,6 +166,7 @@ public class QuestionDisplayActivity extends AppCompatActivity implements Fragme
         Intent i = new Intent(getApplicationContext(), QuizResultActivity.class);
         i.putExtra("Score", totalScore);
         i.putExtra("TotalQuestion", questionTotal);
+        i.putExtra("Difficulty", difficulty);
         dbHelper.close();
         startActivity(i);
     }

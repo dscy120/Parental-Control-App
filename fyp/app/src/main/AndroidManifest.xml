@@ -16,7 +16,7 @@
         <activity android:name=".quiz.record.AttemptDetailActivity" />
         <activity android:name=".quiz.QuizSelectionActivity" />
         <activity android:name=".quiz.record.RecordMainActivity" />
-        <activity android:name=".quiz.question.questionFragment.QuizResultActivity" />
+        <activity android:name=".quiz.question.QuizResultActivity" />
         <activity android:name=".quiz.question.QuestionDisplayActivity" />
         <activity android:name=".quiz.QuizMainActivity" />
         <activity android:name=".admin.ParentActivity" />
