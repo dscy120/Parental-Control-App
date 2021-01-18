@@ -1,5 +1,6 @@
 package com.example.parentalapp.admin;
 
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,23 +10,32 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.preference.PreferenceManager;
 
 import com.example.parentalapp.R;
 
+import static com.example.parentalapp.admin.TimeSettingHelper.ACTIVE_HOUR_START;
+import static com.example.parentalapp.admin.TimeSettingHelper.ACTIVE_MINUTE_START;
+import static com.example.parentalapp.admin.TimeSettingHelper.ACTIVE_HOUR_END;
+import static com.example.parentalapp.admin.TimeSettingHelper.ACTIVE_MINUTE_END;
 
-public class GeneralSettingsActivity extends AppCompatActivity {
+
+public class GeneralSettingsActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
 
     public static final String time = "screenTime";
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-    private TextView remainTime;
+    private TextView remainTime, activeHourStart, activeHourEnd;
     private Button dialog;
     private NumberPicker numberPickerHour, numberPickerMinute;
+    private boolean activeTimeStart = true;
+    private TimeSettingHelper timeSettingHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +44,8 @@ public class GeneralSettingsActivity extends AppCompatActivity {
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         editor = sharedPreferences.edit();
+
+        timeSettingHelper = new TimeSettingHelper(getBaseContext());
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -49,6 +61,8 @@ public class GeneralSettingsActivity extends AppCompatActivity {
                 openTimeDialog();
             }
         });
+
+        setActiveHour();
     }
 
     @Override
@@ -90,12 +104,12 @@ public class GeneralSettingsActivity extends AppCompatActivity {
         numberPickerHour = customLayout.findViewById(R.id.countDownTimePicker_hour);
         numberPickerHour.setMinValue(0);
         numberPickerHour.setMaxValue(23);
-        numberPickerHour.setValue(convertHour(remainingTime));
+        numberPickerHour.setValue(timeSettingHelper.convertHour(remainingTime));
 
         numberPickerMinute = customLayout.findViewById(R.id.countDownTimePicker_minute);
         numberPickerMinute.setMinValue(0);
         numberPickerMinute.setMaxValue(59);
-        numberPickerMinute.setValue(convertMinute(remainingTime));
+        numberPickerMinute.setValue(timeSettingHelper.convertMinute(remainingTime));
     }
 
     public void setTimerPreference(){
@@ -109,22 +123,56 @@ public class GeneralSettingsActivity extends AppCompatActivity {
         return Long.parseLong(sharedPreferences.getString(time, "0"));
     }
 
-    public int convertHour(Long remainingTime){
-        return (int) (remainingTime / (60 * 60));
-    }
-
-    public int convertMinute(Long remainingTime){
-        return (int)((remainingTime % (60 * 60)) / 60);
-    }
-
     public void showRemainingTime(){
         remainTime = findViewById(R.id.textView_remainTime);
         Long r = getRemainingTime();
-        int h = convertHour(r);
-        int m = convertMinute(r);
+        int h = timeSettingHelper.convertHour(r);
+        int m = timeSettingHelper.convertMinute(r);
         String hour = h > 1 ? " hours " : " hour ";
         String minute = m > 1 ? " minutes " : " minute ";
         String remainTimeShow = h + hour + m + minute;
         remainTime.setText(remainTimeShow);
+    }
+
+    @Override
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        if(activeTimeStart){
+            editor.putInt(ACTIVE_HOUR_START, hourOfDay);
+            editor.putInt(ACTIVE_MINUTE_START, minute);
+            editor.apply();
+            activeHourStart = findViewById(R.id.textView_ActiveHour_start);
+            activeHourStart.setText(timeSettingHelper.getActiveHourStart());
+        }else{
+            editor.putInt(ACTIVE_HOUR_END, hourOfDay);
+            editor.putInt(ACTIVE_MINUTE_END, minute);
+            editor.apply();
+            activeHourEnd = findViewById(R.id.textView_AcitveHour_end);
+            activeHourEnd.setText(timeSettingHelper.getActiveHourEnd());
+        }
+
+    }
+
+    public void setActiveHour(){
+        activeHourStart = findViewById(R.id.textView_ActiveHour_start);
+        activeHourStart.setText(timeSettingHelper.getActiveHourStart());
+        activeHourStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activeTimeStart = true;
+                DialogFragment timePicker = new ActiveHourFragment("start");
+                timePicker.show(getSupportFragmentManager(), "Active Hour");
+            }
+        });
+
+        activeHourEnd = findViewById(R.id.textView_AcitveHour_end);
+        activeHourEnd.setText(timeSettingHelper.getActiveHourEnd());
+        activeHourEnd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activeTimeStart = false;
+                DialogFragment timePicker = new ActiveHourFragment("end");
+                timePicker.show(getSupportFragmentManager(), "Active Hour");
+            }
+        });
     }
 }
