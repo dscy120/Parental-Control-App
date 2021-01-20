@@ -13,13 +13,23 @@ import android.widget.Button;
 import android.widget.Toast;
 
 
+import com.example.parentalapp.R;
 import com.example.parentalapp.admin.PinActivity;
+import com.example.parentalapp.main.AccessAlertDialog;
 import com.example.parentalapp.playground.PlaygroundActivity;
 import com.example.parentalapp.playground.ScreenTimeService;
 import com.example.parentalapp.quiz.QuizMainActivity;
 import com.example.parentalapp.reward.RewardMainActivity;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import static com.example.parentalapp.admin.GeneralSettingsActivity.time;
+import static com.example.parentalapp.admin.TimeSettingHelper.ACTIVE_HOUR_START;
+import static com.example.parentalapp.admin.TimeSettingHelper.ACTIVE_MINUTE_START;
+import static com.example.parentalapp.admin.TimeSettingHelper.ACTIVE_HOUR_END;
+import static com.example.parentalapp.admin.TimeSettingHelper.ACTIVE_MINUTE_END;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -111,14 +121,46 @@ public class MainActivity extends AppCompatActivity {
         // check remaining time before launching to playground
         long remainingTime = Long.parseLong(sharedPreferences.getString(time, "0"));
         if (remainingTime <= 0){
-            Toast.makeText(getApplicationContext(),"No Screen Time Remaining",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), time,Toast.LENGTH_SHORT).show();
+            showAlertDialog("Warning", "No Screen Time Remaining!");
         }else{
-            Intent serviceIntent = new Intent(this, ScreenTimeService.class);
-            ContextCompat.startForegroundService(this, serviceIntent);
-            Intent playGroundIntent = new Intent (getApplicationContext(), PlaygroundActivity.class);
-            startActivity(playGroundIntent);
+            if(!checkActiveHour()){
+                showAlertDialog("Warning", "Not within active hour!");
+            }else{
+                Intent serviceIntent = new Intent(this, ScreenTimeService.class);
+                ContextCompat.startForegroundService(this, serviceIntent);
+                Intent playGroundIntent = new Intent (getApplicationContext(), PlaygroundActivity.class);
+                startActivity(playGroundIntent);
+            }
         }
 
+    }
+
+    private void showAlertDialog(String title, String message){
+        AccessAlertDialog accessAlertDialog = new AccessAlertDialog(title, message);
+        accessAlertDialog.show(getSupportFragmentManager(), "access alert dialog");
+    }
+
+    private boolean checkActiveHour(){
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+        String[] currentTime = format.format(Calendar.getInstance().getTime()).split(":");
+
+        int currentHour = Integer.parseInt(currentTime[0]);
+        int currentMinute = Integer.parseInt(currentTime[1]);
+
+        int hourStart = sharedPreferences.getInt(ACTIVE_HOUR_START, 0);
+        int hourEnd = sharedPreferences.getInt(ACTIVE_HOUR_END, 0);
+        int minuteStart = sharedPreferences.getInt(ACTIVE_MINUTE_START, 0);
+        int minuteEnd = sharedPreferences.getInt(ACTIVE_MINUTE_END, 0);
+
+        if(currentHour - hourStart < hourEnd - hourStart){
+            return true;
+        }else if(currentHour == hourStart && currentMinute > minuteStart){
+            return true;
+        }else if(currentHour == hourEnd && currentMinute < minuteEnd){
+            return true;
+        }
+        return false;
     }
 
 }

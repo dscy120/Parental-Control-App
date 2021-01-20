@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.parentalapp.MainActivity;
 import com.example.parentalapp.R;
-import com.example.parentalapp.admin.ParentActivity;
 
 public class PinActivity extends AppCompatActivity {
     private EditText editText_pin;

@@ -11,7 +11,6 @@ import android.widget.Button;
 
 import com.example.parentalapp.MainActivity;
 import com.example.parentalapp.R;
-import com.example.parentalapp.quiz.record.AttemptDetailActivity;
 import com.example.parentalapp.quiz.record.RecordMainActivity;
 
 public class QuizMainActivity extends AppCompatActivity {

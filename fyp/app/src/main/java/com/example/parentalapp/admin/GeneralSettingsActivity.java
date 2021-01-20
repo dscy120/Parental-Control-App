@@ -107,6 +107,13 @@ public class GeneralSettingsActivity extends AppCompatActivity implements TimePi
         numberPickerHour.setValue(timeSettingHelper.convertHour(remainingTime));
 
         numberPickerMinute = customLayout.findViewById(R.id.countDownTimePicker_minute);
+        NumberPicker.Formatter formatter = new NumberPicker.Formatter() {
+            @Override
+            public String format(int value) {
+                return String.format("%02d", value);
+            }
+        };
+        numberPickerMinute.setFormatter(formatter);
         numberPickerMinute.setMinValue(0);
         numberPickerMinute.setMaxValue(59);
         numberPickerMinute.setValue(timeSettingHelper.convertMinute(remainingTime));

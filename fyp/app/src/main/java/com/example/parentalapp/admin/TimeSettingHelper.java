@@ -29,14 +29,14 @@ public class TimeSettingHelper {
     public String getActiveHourStart(){
         int hour = sharedPreferences.getInt(ACTIVE_HOUR_START, 0);
         int minute = sharedPreferences.getInt(ACTIVE_MINUTE_START, 0);
-        String time = "From " + hour + " : " + minute;
+        String time = String.format("%02d", hour)+ " : " + String.format("%02d", minute);
         return time;
     }
 
     public String getActiveHourEnd(){
         int hour = sharedPreferences.getInt(ACTIVE_HOUR_END, 0);
         int minute = sharedPreferences.getInt(ACTIVE_MINUTE_END, 0);
-        String time ="To " + hour + " : " + minute;
+        String time = String.format("%02d", hour)+ " : " + String.format("%02d", minute);
         return time;
     }
 }
