@@ -11,9 +11,9 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.parentalapp.R;
-import com.example.parentalapp.quiz.DatabaseOpenHelper;
 import com.example.parentalapp.quiz.question.questionFragment.FragmentListener;
 import com.example.parentalapp.quiz.question.questionFragment.QuestionFragment;
+import com.example.parentalapp.quiz.record.RecordDBHelper;
 
 import java.util.Collections;
 import java.util.List;
@@ -24,7 +24,8 @@ public class QuestionDisplayActivity extends AppCompatActivity implements Fragme
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     QuestionFragment questionFragment;
-    DatabaseOpenHelper dbHelper;
+    QuizDBHelper dbHelper;
+    RecordDBHelper recordDBHelper;
 
     private TextView textView_questionNumber, textView_question;
 
@@ -50,7 +51,8 @@ public class QuestionDisplayActivity extends AppCompatActivity implements Fragme
         textView_question = findViewById(R.id.textView_question);
 
         // Connect to database and get all question
-        dbHelper = new DatabaseOpenHelper(getApplicationContext());
+        dbHelper = new QuizDBHelper(getApplicationContext());
+        recordDBHelper = new RecordDBHelper(getApplicationContext());
         Bundle extras = getIntent().getExtras();
         if(extras != null){
             subject = extras.getString("subject");
@@ -158,7 +160,7 @@ public class QuestionDisplayActivity extends AppCompatActivity implements Fragme
         }else{
             score = 0;
         }
-        dbHelper.addRecordDB(currentQuestion, attemptId, input, score);
+        recordDBHelper.addRecordDB(currentQuestion, attemptId, input, score);
     }
 
     // Show final score

@@ -11,7 +11,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.parentalapp.R;
-import com.example.parentalapp.quiz.DatabaseOpenHelper;
+import com.example.parentalapp.database.DatabaseOpenHelper;
 import com.example.parentalapp.quiz.QuizMainActivity;
 
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class RecordMainActivity extends AppCompatActivity implements RecordViewA
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private DatabaseOpenHelper quizDBHelper;
+    private RecordDBHelper recordDBHelper;
     private ArrayList<RecordItem> recordList;
 
     @Override
@@ -37,8 +37,8 @@ public class RecordMainActivity extends AppCompatActivity implements RecordViewA
 
         recordList = new ArrayList<>();
 
-        quizDBHelper = new DatabaseOpenHelper(this);
-        Cursor c = quizDBHelper.getAllRecord();
+        recordDBHelper = new RecordDBHelper(this);
+        Cursor c = recordDBHelper.getAllRecord();
         if(c.moveToFirst()){
             do {
                 int id = c.getInt(0);

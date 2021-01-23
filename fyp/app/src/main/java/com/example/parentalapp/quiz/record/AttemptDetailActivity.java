@@ -12,9 +12,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.parentalapp.R;
-import com.example.parentalapp.quiz.DatabaseOpenHelper;
+import com.example.parentalapp.database.DatabaseOpenHelper;
 import com.example.parentalapp.quiz.QuizConstant;
-import com.example.parentalapp.quiz.QuizMainActivity;
 
 import java.util.ArrayList;
 
@@ -24,7 +23,7 @@ public class AttemptDetailActivity extends AppCompatActivity implements AttemptV
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private DatabaseOpenHelper quizDBHelper;
+    private RecordDBHelper recordDBHelper;
     private ArrayList<AttemptDetail> attemptList;
 
     @Override
@@ -40,13 +39,13 @@ public class AttemptDetailActivity extends AppCompatActivity implements AttemptV
 
         attemptList = new ArrayList<>();
 
-        quizDBHelper = new DatabaseOpenHelper(this);
+        recordDBHelper = new RecordDBHelper(this);
         Bundle extras = getIntent().getExtras();
         int attempt_id = -1;
         if(extras != null){
             attempt_id = extras.getInt("id");
         }
-        Cursor c = quizDBHelper.getAttemptDetail(attempt_id); // test
+        Cursor c = recordDBHelper.getAttemptDetail(attempt_id); // test
         if(c.moveToFirst()){
             do {
                 int id = c.getInt(c.getColumnIndex(QuizConstant.QuestionTable._ID));

@@ -17,6 +17,8 @@ import com.example.parentalapp.quiz.question.QuestionDisplayActivity;
 
 public class QuizSelectionActivity extends AppCompatActivity implements SelectConfirmDialog.SelectConfirmDialogListener {
 
+    public static String SUBJECT = "Subject";
+    public static String DIFFICULTY = "Difficulty";
     Spinner spinner_subject, spinner_difficulty;
     Button button_confirm_selection;
 
@@ -65,6 +67,10 @@ public class QuizSelectionActivity extends AppCompatActivity implements SelectCo
 
     public void openConfirmDialog(){
         SelectConfirmDialog selectConfirmDialog = new SelectConfirmDialog();
+        Bundle bundle = new Bundle();
+        bundle.putString(SUBJECT, spinner_subject.getSelectedItem().toString());
+        bundle.putString(DIFFICULTY, spinner_difficulty.getSelectedItem().toString());
+        selectConfirmDialog.setArguments(bundle);
         selectConfirmDialog.show(getSupportFragmentManager(), "Selection confirm dialog");
     }
 
