@@ -26,10 +26,7 @@ public class SelectConfirmDialog extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         final View customLayout = getActivity().getLayoutInflater().inflate(R.layout.dialog_confirm_quiz_detail, null);
 
-        TextView subj = customLayout.findViewById(R.id.textView_subj_confirm);
-        subj.setText(getArguments().getString(SUBJECT));
-        TextView diff = customLayout.findViewById(R.id.textView_diff_confirm);
-        diff.setText(getArguments().getString(DIFFICULTY));
+        setDialogInfo(customLayout, getArguments().getString(SUBJECT), getArguments().getString(DIFFICULTY));
 
         builder.setView(customLayout);
         builder.setTitle("Confirm Quiz Details")
@@ -57,6 +54,13 @@ public class SelectConfirmDialog extends AppCompatDialogFragment {
             throw new ClassCastException(context.toString() +
                     "must implement SelectConfirmDialogListener");
         }
+    }
+
+    private void setDialogInfo(View customLayout, String subj, String diff){
+        TextView subject = customLayout.findViewById(R.id.textView_subj_confirm);
+        TextView difficulty = customLayout.findViewById(R.id.textView_diff_confirm);
+        subject.setText("Subject : " + subj);
+        difficulty.setText("Difficulty : " + diff);
     }
 
     public interface SelectConfirmDialogListener{

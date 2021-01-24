@@ -21,7 +21,7 @@ import com.example.parentalapp.quiz.record.RecordViewAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RewardMainActivity extends AppCompatActivity implements RewardViewAdapter.RewardClickListener{
+public class RewardMainActivity extends AppCompatActivity implements RewardViewAdapter.RewardClickListener, RewardConfirmDialog.RewardConfirmDialogListener{
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
@@ -31,7 +31,12 @@ public class RewardMainActivity extends AppCompatActivity implements RewardViewA
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<RewardItem> rewardItemList;
     private RewardDBHelper rewardDBHelper;
+    private int allowance;
+
     public static final String REWARD_POINTS = "reward_points";
+    public static final String ITEM_NAME = "item_name";
+    public static final String POINTS = "points";
+    public static final String ALLOWANCE = "allowance";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +53,10 @@ public class RewardMainActivity extends AppCompatActivity implements RewardViewA
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         initPoints();
 
-        setTextView();
+        allowance = sharedPreferences.getInt(REWARD_POINTS, 0);
+
+        rewardPoints = findViewById(R.id.textView_rewardPoint);
+        rewardPoints.setText(String.valueOf(allowance));
 
         rewardDBHelper = new RewardDBHelper(getApplicationContext());
         rewardItemList = rewardDBHelper.getRewardItem();
@@ -74,12 +82,6 @@ public class RewardMainActivity extends AppCompatActivity implements RewardViewA
         }
     }
 
-    private void setTextView(){
-        rewardPoints = findViewById(R.id.textView_rewardPoint);
-        String rewardPointText = sharedPreferences.getInt(REWARD_POINTS, 0) + " points";
-        rewardPoints.setText(rewardPointText);
-    }
-
     // Initialize or reset total reward points
     public void initPoints(){
         sharedPreferences.edit().putInt(REWARD_POINTS, 0);
@@ -87,6 +89,18 @@ public class RewardMainActivity extends AppCompatActivity implements RewardViewA
 
     @Override
     public void onRewardClick(int position) {
+        RewardItem rewardItem = rewardItemList.get(position);
+        RewardConfirmDialog rewardConfirmDialog = new RewardConfirmDialog();
+        Bundle bundle = new Bundle();
+        bundle.putString(ITEM_NAME, rewardItem.getName());
+        bundle.putInt(POINTS, rewardItem.getPoint());
+        bundle.putInt(ALLOWANCE, allowance);
+        rewardConfirmDialog.setArguments(bundle);
+        rewardConfirmDialog.show(getSupportFragmentManager(), "Reward Confirm Dialog");
+    }
 
+    @Override
+    public void purchase(){
+        // TODO: accept purchase action
     }
 }
