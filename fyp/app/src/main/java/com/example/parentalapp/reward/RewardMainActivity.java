@@ -21,7 +21,7 @@ import com.example.parentalapp.quiz.record.RecordViewAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RewardMainActivity extends AppCompatActivity implements RewardViewAdapter.RewardClickListener, RewardConfirmDialog.RewardConfirmDialogListener{
+public class RewardMainActivity extends AppCompatActivity implements RewardViewAdapter.RewardClickListener{
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
@@ -37,6 +37,7 @@ public class RewardMainActivity extends AppCompatActivity implements RewardViewA
     public static final String ITEM_NAME = "item_name";
     public static final String POINTS = "points";
     public static final String ALLOWANCE = "allowance";
+    public static final String QUANTITY = "quantity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,17 +91,13 @@ public class RewardMainActivity extends AppCompatActivity implements RewardViewA
     @Override
     public void onRewardClick(int position) {
         RewardItem rewardItem = rewardItemList.get(position);
-        RewardConfirmDialog rewardConfirmDialog = new RewardConfirmDialog();
         Bundle bundle = new Bundle();
         bundle.putString(ITEM_NAME, rewardItem.getName());
         bundle.putInt(POINTS, rewardItem.getPoint());
         bundle.putInt(ALLOWANCE, allowance);
-        rewardConfirmDialog.setArguments(bundle);
-        rewardConfirmDialog.show(getSupportFragmentManager(), "Reward Confirm Dialog");
-    }
 
-    @Override
-    public void purchase(){
-        // TODO: accept purchase action
+        Intent i = new Intent(this, RewardDetailActivity.class);
+        i.putExtras(bundle);
+        startActivity(i);
     }
 }

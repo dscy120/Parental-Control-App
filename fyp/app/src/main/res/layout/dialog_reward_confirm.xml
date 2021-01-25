@@ -6,80 +6,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <TextView
-        android:id="@+id/textView_dialog_item_name"
+        android:id="@+id/textView_confirm_item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Item"
+        android:text="confirm item name here"
+        android:textSize="18sp"
         style="@style/dialog_item_style"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.077" />
-
-    <Button
-        android:id="@+id/button_add_item_quantity"
-        style="@style/dialog_item_style"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:background="@drawable/add_circle_outline_24px"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.317"
-        app:layout_constraintStart_toEndOf="@+id/textView_dialog_item_quantity"
-        app:layout_constraintTop_toBottomOf="@+id/textView_dialog_required_points"
-        app:layout_constraintVertical_bias="0.132" />
-
-    <TextView
-        android:id="@+id/textView_dialog_item_quantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="quantity"
-        style="@style/dialog_item_style"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_dialog_required_points"
-        app:layout_constraintVertical_bias="0.144" />
-
-    <Button
-        android:id="@+id/button_reduce_item_quantity"
-        style="@style/dialog_item_style"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:background="@drawable/remove_circle_outline_24px"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textView_dialog_item_quantity"
-        app:layout_constraintHorizontal_bias="0.654"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_dialog_required_points"
-        app:layout_constraintVertical_bias="0.13" />
-
-    <TextView
-        android:id="@+id/textView_dialog_required_points"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="points"
-        style="@style/dialog_item_style"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_dialog_item_name"
         app:layout_constraintVertical_bias="0.065" />
 
-    <Button
-        android:id="@+id/button3"
+    <TextView
+        android:id="@+id/textView_confirm_item_quantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="confirm item quantity here"
+        android:textSize="18sp"
         style="@style/dialog_item_style"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_dialog_item_quantity"
-        app:layout_constraintVertical_bias="0.205" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_confirm_item_name"
+        app:layout_constraintVertical_bias="0.05" />
+
+    <TextView
+        android:id="@+id/textView_confirm_reward_points_deduction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="reward point deduction"
+        android:textSize="18sp"
+        style="@style/dialog_item_style"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_confirm_item_quantity"
+        app:layout_constraintVertical_bias="0.062" />
 </androidx.constraintlayout.widget.ConstraintLayout>

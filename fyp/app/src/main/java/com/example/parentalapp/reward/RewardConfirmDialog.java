@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,37 +21,34 @@ import org.w3c.dom.Text;
 import static com.example.parentalapp.reward.RewardMainActivity.ALLOWANCE;
 import static com.example.parentalapp.reward.RewardMainActivity.ITEM_NAME;
 import static com.example.parentalapp.reward.RewardMainActivity.POINTS;
+import static com.example.parentalapp.reward.RewardMainActivity.QUANTITY;
 
 public class RewardConfirmDialog extends AppCompatDialogFragment {
-    private View customLayout;
-    private  RewardConfirmDialogListener listener;
-    private View base;
-    private TextView textViewquantity, textViewItem, textViewPoint;
-    private int itemQuantity, requiredPoints, allowance;
-    private String itemName;
+    private RewardConfirmDialogListener listener;
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        LayoutInflater layoutInflater = getActivity().getLayoutInflater();
+        View customLayout = layoutInflater.inflate(R.layout.dialog_reward_confirm, null);
 
-        initialize();
-        setButtons();
-
-        builder.setView(customLayout);
-        builder.setTitle("Confirm Quiz Details")
+        builder.setView(customLayout)
+                .setTitle("Confirm Purchase Details")
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // empty function
                     }
                 })
-                .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Buy", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         listener.purchase();
                     }
                 });
+        initialize(customLayout);
+
         return builder.create();
     }
 
@@ -65,52 +63,15 @@ public class RewardConfirmDialog extends AppCompatDialogFragment {
         }
     }
 
-    private void initialize(){
-        // set dialog layout
-        customLayout = getActivity().getLayoutInflater().inflate(R.layout.dialog_reward_confirm, null);
-        // set TextView
-
-        textViewquantity = customLayout.findViewById(R.id.textView_dialog_item_quantity);
-        textViewItem = customLayout.findViewById(R.id.textView_dialog_item_name);
-        textViewPoint = customLayout.findViewById(R.id.textView_dialog_required_points);
-
-        requiredPoints = getArguments().getInt(POINTS);
-        itemName = getArguments().getString(ITEM_NAME);
-        itemQuantity = 0;
-        allowance = getArguments().getInt(ALLOWANCE);
-
-        updateText();
+    private void initialize(View customLayout){
+        TextView textViewquantity = customLayout.findViewById(R.id.textView_confirm_item_quantity);
+        textViewquantity.setText(getArguments().getString(QUANTITY));
+        TextView textViewItem = customLayout.findViewById(R.id.textView_confirm_item_name);
+        textViewItem.setText(getArguments().getString(ITEM_NAME));
+        TextView textViewPoint = customLayout.findViewById(R.id.textView_confirm_reward_points_deduction);
+        textViewPoint.setText(getArguments().getString(POINTS));
     }
 
-    private void updateText(){
-        textViewItem.setText(itemName);
-        textViewPoint.setText("Required points: " + (requiredPoints * itemQuantity) );
-        textViewquantity.setText(String.valueOf(itemQuantity));
-    }
-
-    private void setButtons(){
-        Button button_add = customLayout.findViewById(R.id.button_add_item_quantity);
-        button_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(requiredPoints * (itemQuantity + 1) < allowance){
-                    itemQuantity++;
-                }
-                updateText();
-            }
-        });
-
-        Button button_reduce = customLayout.findViewById(R.id.button_reduce_item_quantity);
-        button_reduce.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(itemQuantity > 0){
-                    itemQuantity--;
-                }
-                updateText();
-            }
-        });
-    }
 
     public interface RewardConfirmDialogListener{
         void purchase();
