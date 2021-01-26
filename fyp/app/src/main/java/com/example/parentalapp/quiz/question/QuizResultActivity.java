@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.example.parentalapp.R;
 import com.example.parentalapp.quiz.QuizMainActivity;
-import static com.example.parentalapp.reward.RewardMainActivity.REWARD_POINTS;
+import static com.example.parentalapp.admin.rewardpoint.RewardPointHelper.REWARD_POINTS;
 public class QuizResultActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;

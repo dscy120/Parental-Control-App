@@ -22,7 +22,7 @@ import androidx.preference.PreferenceScreen;
 
 
 import com.example.parentalapp.R;
-import com.example.parentalapp.admin.ParentActivity;
+import com.example.parentalapp.admin.ParentMainActivity;
 
 import java.util.List;
 
@@ -53,7 +53,7 @@ public class AppRestrictActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                startActivity(new Intent(this, ParentActivity.class));
+                startActivity(new Intent(this, ParentMainActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import com.example.parentalapp.R;
-import com.example.parentalapp.admin.ParentActivity;
 import com.example.parentalapp.quiz.question.QuestionDisplayActivity;
 
 public class QuizSelectionActivity extends AppCompatActivity implements SelectConfirmDialog.SelectConfirmDialogListener {

@@ -21,6 +21,8 @@ import com.example.parentalapp.quiz.record.RecordViewAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.parentalapp.admin.rewardpoint.RewardPointHelper.REWARD_POINTS;
+
 public class RewardMainActivity extends AppCompatActivity implements RewardViewAdapter.RewardClickListener{
 
     private SharedPreferences sharedPreferences;
@@ -33,7 +35,6 @@ public class RewardMainActivity extends AppCompatActivity implements RewardViewA
     private RewardDBHelper rewardDBHelper;
     private int allowance;
 
-    public static final String REWARD_POINTS = "reward_points";
     public static final String ITEM_NAME = "item_name";
     public static final String POINTS = "points";
     public static final String ALLOWANCE = "allowance";

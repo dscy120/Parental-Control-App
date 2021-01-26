@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.parentalapp.R;
-import com.example.parentalapp.admin.ParentActivity;
+import com.example.parentalapp.admin.ParentMainActivity;
 
 
 public class GeneralSettingsActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
@@ -57,7 +57,7 @@ public class GeneralSettingsActivity extends AppCompatActivity implements TimePi
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                startActivity(new Intent(this, ParentActivity.class));
+                startActivity(new Intent(this, ParentMainActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

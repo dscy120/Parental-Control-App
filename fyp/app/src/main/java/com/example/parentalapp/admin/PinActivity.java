@@ -35,7 +35,7 @@ public class PinActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (editText_pin.getText().toString().equals("1234")){
                     Intent i = new Intent();
-                    startActivity(new Intent(getApplicationContext(), ParentActivity.class));
+                    startActivity(new Intent(getApplicationContext(), ParentMainActivity.class));
                 }else{
                     Toast.makeText(getApplicationContext(),"Wrong pin",Toast.LENGTH_SHORT).show();
                 }

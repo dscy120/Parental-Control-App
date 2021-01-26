@@ -12,17 +12,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.parentalapp.MainActivity;
 import com.example.parentalapp.R;
 import com.example.parentalapp.admin.apprestrict.AppRestrictActivity;
+import com.example.parentalapp.admin.rewardpoint.RewardPointControlActivity;
 import com.example.parentalapp.admin.screentime.GeneralSettingsActivity;
 
-public class ParentActivity extends AppCompatActivity {
+public class ParentMainActivity extends AppCompatActivity {
 
-    Button timeSettings, appSelect;
+    Button timeSettings, appSelect, setRewardPoint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
+        // back button
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -35,11 +37,20 @@ public class ParentActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), GeneralSettingsActivity.class));
             }
         });
+
         appSelect = findViewById(R.id.button_appSelect);
         appSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), AppRestrictActivity.class));
+            }
+        });
+
+        setRewardPoint = findViewById(R.id.button_set_reward_point);
+        setRewardPoint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), RewardPointControlActivity.class));
             }
         });
     }
