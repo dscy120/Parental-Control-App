@@ -1,4 +1,4 @@
-package com.example.parentalapp.admin;
+package com.example.parentalapp.admin.screentime;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -11,10 +11,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.preference.PreferenceManager;
 
-import static com.example.parentalapp.admin.TimeSettingHelper.ACTIVE_HOUR_END;
-import static com.example.parentalapp.admin.TimeSettingHelper.ACTIVE_HOUR_START;
-import static com.example.parentalapp.admin.TimeSettingHelper.ACTIVE_MINUTE_END;
-import static com.example.parentalapp.admin.TimeSettingHelper.ACTIVE_MINUTE_START;
+import static com.example.parentalapp.admin.screentime.TimeSettingHelper.ACTIVE_HOUR_END;
+import static com.example.parentalapp.admin.screentime.TimeSettingHelper.ACTIVE_HOUR_START;
+import static com.example.parentalapp.admin.screentime.TimeSettingHelper.ACTIVE_MINUTE_END;
+import static com.example.parentalapp.admin.screentime.TimeSettingHelper.ACTIVE_MINUTE_START;
 
 public class ActiveHourFragment extends DialogFragment {
     private SharedPreferences sharedPreferences;

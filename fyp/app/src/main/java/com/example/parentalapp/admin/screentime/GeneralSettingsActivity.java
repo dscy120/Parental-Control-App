@@ -1,9 +1,8 @@
-package com.example.parentalapp.admin;
+package com.example.parentalapp.admin.screentime;
 
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,21 +15,13 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
-import androidx.preference.PreferenceManager;
 
 import com.example.parentalapp.R;
-
-import static com.example.parentalapp.admin.TimeSettingHelper.ACTIVE_HOUR_START;
-import static com.example.parentalapp.admin.TimeSettingHelper.ACTIVE_MINUTE_START;
-import static com.example.parentalapp.admin.TimeSettingHelper.ACTIVE_HOUR_END;
-import static com.example.parentalapp.admin.TimeSettingHelper.ACTIVE_MINUTE_END;
+import com.example.parentalapp.admin.ParentActivity;
 
 
 public class GeneralSettingsActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
 
-    public static final String time = "screenTime";
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
     private TextView remainTime, activeHourStart, activeHourEnd;
     private Button dialog;
     private NumberPicker numberPickerHour, numberPickerMinute;
@@ -41,9 +32,6 @@ public class GeneralSettingsActivity extends AppCompatActivity implements TimePi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        editor = sharedPreferences.edit();
 
         timeSettingHelper = new TimeSettingHelper(getBaseContext());
 
@@ -99,7 +87,7 @@ public class GeneralSettingsActivity extends AppCompatActivity implements TimePi
     }
 
     public void setTimePickerDisplay(View customLayout){
-        Long remainingTime = getRemainingTime();
+        Long remainingTime = timeSettingHelper.getRemainingTime();
 
         numberPickerHour = customLayout.findViewById(R.id.countDownTimePicker_hour);
         numberPickerHour.setMinValue(0);
@@ -122,17 +110,12 @@ public class GeneralSettingsActivity extends AppCompatActivity implements TimePi
     public void setTimerPreference(){
         int hour = numberPickerHour.getValue();
         int minute = numberPickerMinute.getValue();
-        editor.putString(time, String.valueOf(hour * 60 * 60 + minute * 60));
-        editor.apply();
-    }
-
-    public Long getRemainingTime(){
-        return Long.parseLong(sharedPreferences.getString(time, "0"));
+        timeSettingHelper.setRemainingScreenTime(hour * 60 * 60 + minute * 60);
     }
 
     public void showRemainingTime(){
         remainTime = findViewById(R.id.textView_remainTime);
-        Long r = getRemainingTime();
+        Long r = timeSettingHelper.getRemainingTime();
         int h = timeSettingHelper.convertHour(r);
         int m = timeSettingHelper.convertMinute(r);
         String hour = h > 1 ? " hours " : " hour ";
@@ -144,24 +127,22 @@ public class GeneralSettingsActivity extends AppCompatActivity implements TimePi
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         if(activeTimeStart){
-            editor.putInt(ACTIVE_HOUR_START, hourOfDay);
-            editor.putInt(ACTIVE_MINUTE_START, minute);
-            editor.apply();
+            timeSettingHelper.setActiveHourStart(hourOfDay);
+            timeSettingHelper.setActiveMinuteStart(minute);
             activeHourStart = findViewById(R.id.textView_ActiveHour_start);
-            activeHourStart.setText(timeSettingHelper.getActiveHourStart());
+            activeHourStart.setText(timeSettingHelper.getActiveHourStartString());
         }else{
-            editor.putInt(ACTIVE_HOUR_END, hourOfDay);
-            editor.putInt(ACTIVE_MINUTE_END, minute);
-            editor.apply();
+            timeSettingHelper.setActiveHourEnd(hourOfDay);
+            timeSettingHelper.setActiveMinuteEnd(minute);
             activeHourEnd = findViewById(R.id.textView_AcitveHour_end);
-            activeHourEnd.setText(timeSettingHelper.getActiveHourEnd());
+            activeHourEnd.setText(timeSettingHelper.getActiveHourEndString());
         }
 
     }
 
     public void setActiveHour(){
         activeHourStart = findViewById(R.id.textView_ActiveHour_start);
-        activeHourStart.setText(timeSettingHelper.getActiveHourStart());
+        activeHourStart.setText(timeSettingHelper.getActiveHourStartString());
         activeHourStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,7 +153,7 @@ public class GeneralSettingsActivity extends AppCompatActivity implements TimePi
         });
 
         activeHourEnd = findViewById(R.id.textView_AcitveHour_end);
-        activeHourEnd.setText(timeSettingHelper.getActiveHourEnd());
+        activeHourEnd.setText(timeSettingHelper.getActiveHourEndString());
         activeHourEnd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

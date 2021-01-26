@@ -1,4 +1,4 @@
-package com.example.parentalapp.admin;
+package com.example.parentalapp.admin.apprestrict;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,6 +22,7 @@ import androidx.preference.PreferenceScreen;
 
 
 import com.example.parentalapp.R;
+import com.example.parentalapp.admin.ParentActivity;
 
 import java.util.List;
 

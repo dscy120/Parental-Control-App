@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.parentalapp.MainActivity;
 import com.example.parentalapp.R;
+import com.example.parentalapp.admin.apprestrict.AppRestrictActivity;
+import com.example.parentalapp.admin.screentime.GeneralSettingsActivity;
 
 public class ParentActivity extends AppCompatActivity {
 

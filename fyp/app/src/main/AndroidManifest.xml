@@ -22,11 +22,11 @@
         <activity android:name=".quiz.QuizMainActivity" />
         <activity android:name=".admin.ParentActivity" />
         <activity
-            android:name=".admin.AppRestrictActivity"
+            android:name=".admin.apprestrict.AppRestrictActivity"
             android:label="@string/title_activity_app_restrict" />
         <activity android:name=".admin.PinActivity" />
         <activity
-            android:name=".admin.GeneralSettingsActivity"
+            android:name=".admin.screentime.GeneralSettingsActivity"
             android:label="@string/title_activity_general_settings" />
         <activity android:name=".playground.PlaygroundActivity" />
         <activity android:name=".MainActivity">

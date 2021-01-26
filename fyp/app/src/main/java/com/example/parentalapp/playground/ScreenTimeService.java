@@ -7,26 +7,24 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
-import androidx.preference.PreferenceManager;
 
 import com.example.parentalapp.MainActivity;
 import com.example.parentalapp.R;
+import com.example.parentalapp.admin.screentime.TimeSettingHelper;
 
 import java.util.concurrent.TimeUnit;
 
 import static com.example.parentalapp.playground.ScreenTimeApp.CHANNEL_ID;
-import static com.example.parentalapp.admin.GeneralSettingsActivity.time;
 
 public class ScreenTimeService extends Service {
 
     public static final int NOTIFICATION_CHANNEL = 101;
-    private SharedPreferences sharedPreferences;
+    private TimeSettingHelper timeSettingHelper;
     private ScreenTimer timer;
 
     private long remainingTime;
@@ -34,13 +32,13 @@ public class ScreenTimeService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        timeSettingHelper = new TimeSettingHelper(getBaseContext());
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         //timer part
-        remainingTime = Long.parseLong(sharedPreferences.getString(time, "0")) * 1000; // get remaining Time in preferences.xml
+        remainingTime = timeSettingHelper.getRemainingTime() * 1000; // get remaining Time in preferences.xml
         timer = new ScreenTimer(remainingTime, 1000);
         timer.start();
 
@@ -57,9 +55,7 @@ public class ScreenTimeService extends Service {
     @Override
     public void onDestroy() {
         timer.cancel();
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(time, String.valueOf(remainingTime / 1000));
-        editor.apply();
+        timeSettingHelper.setRemainingScreenTime(remainingTime / 1000);
         super.onDestroy();
         // jump back to main page
         Intent mainActivity = new Intent(getApplicationContext(), MainActivity.class);
