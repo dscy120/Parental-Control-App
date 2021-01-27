@@ -76,7 +76,7 @@ public class RewardDetailActivity extends AppCompatActivity implements RewardCon
         button_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(requiredPoints * (itemQuantity + 1) < allowance){
+                if(requiredPoints * (itemQuantity + 1) <= allowance){
                     itemQuantity++;
                 }
                 updateText();
