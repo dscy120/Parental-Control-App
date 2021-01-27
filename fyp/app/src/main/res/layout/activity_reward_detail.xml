@@ -8,10 +8,11 @@
 
     <TextView
         android:id="@+id/textView_dialog_item_name"
+        style="@style/dialog_item_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Item"
-        style="@style/dialog_item_style"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -34,10 +35,11 @@
 
     <TextView
         android:id="@+id/textView_dialog_item_quantity"
+        style="@style/dialog_item_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="quantity"
-        style="@style/dialog_item_style"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -60,10 +62,11 @@
 
     <TextView
         android:id="@+id/textView_dialog_required_points"
+        style="@style/dialog_item_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="points"
-        style="@style/dialog_item_style"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".admin.rewardpoint.RewardPointControlActivity"></activity>
+        <activity android:name=".reward.RewardResultActivity"></activity>
+        <activity android:name=".admin.rewardpoint.RewardPointControlActivity" />
         <activity android:name=".reward.RewardDetailActivity" />
         <activity android:name=".reward.RewardMainActivity" />
         <activity android:name=".quiz.record.AttemptDetailActivity" />

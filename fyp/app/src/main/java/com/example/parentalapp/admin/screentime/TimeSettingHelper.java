@@ -27,6 +27,10 @@ public class TimeSettingHelper {
         sharedPreferences.edit().putLong(TIME, remainingScreenTime).apply();
     }
 
+    public void addRemainingScreenTime(long time){
+        setRemainingScreenTime(getRemainingTime() + time);
+    }
+
     public int convertHour(Long remainingTime){
         return (int) (remainingTime / (60 * 60));
     }

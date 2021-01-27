@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.parentalapp.admin.rewardpoint.RewardPointHelper.REWARD_POINTS;
+import static com.example.parentalapp.reward.RewardDBHelper.REWARD_ITEM_ID;
 
 public class RewardMainActivity extends AppCompatActivity implements RewardViewAdapter.RewardClickListener{
 
@@ -93,6 +94,7 @@ public class RewardMainActivity extends AppCompatActivity implements RewardViewA
     public void onRewardClick(int position) {
         RewardItem rewardItem = rewardItemList.get(position);
         Bundle bundle = new Bundle();
+        bundle.putInt(REWARD_ITEM_ID, rewardItem.getId());
         bundle.putString(ITEM_NAME, rewardItem.getName());
         bundle.putInt(POINTS, rewardItem.getPoint());
         bundle.putInt(ALLOWANCE, allowance);

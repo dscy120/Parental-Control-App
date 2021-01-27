@@ -22,4 +22,12 @@ public class RewardPointHelper {
         sharedPreferences.edit().putInt(REWARD_POINTS, points).apply();
     }
 
+    public void addRewardPoints(int points){
+        sharedPreferences.edit().putInt(REWARD_POINTS, getCurrentPoints() + points).apply();
+    }
+
+    public void deductRewardPoints(int points){
+        sharedPreferences.edit().putInt(REWARD_POINTS, getCurrentPoints() - points).apply();
+    }
+
 }
