@@ -10,24 +10,21 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.parentalapp.MainActivity;
 import com.example.parentalapp.R;
-import com.example.parentalapp.quiz.record.RecordItem;
-import com.example.parentalapp.quiz.record.RecordViewAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import static com.example.parentalapp.admin.rewardpoint.RewardPointHelper.REWARD_POINTS;
+import static com.example.parentalapp.admin.rewardpoint.RewardPointConfig.REWARD_POINTS;
 import static com.example.parentalapp.reward.RewardDBHelper.REWARD_ITEM_ID;
 
 public class RewardMainActivity extends AppCompatActivity implements RewardViewAdapter.RewardClickListener{
 
     private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
     private TextView rewardPoints;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -71,6 +68,14 @@ public class RewardMainActivity extends AppCompatActivity implements RewardViewA
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
+        Button button_test = findViewById(R.id.button_purchase_history);
+        button_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO: show purchase history
+            }
+        });
 
     }
 

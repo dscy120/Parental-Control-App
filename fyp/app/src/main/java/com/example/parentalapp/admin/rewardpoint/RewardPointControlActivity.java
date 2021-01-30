@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +12,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.parentalapp.MainActivity;
 import com.example.parentalapp.R;
 import com.example.parentalapp.admin.ParentMainActivity;
 
@@ -22,7 +20,7 @@ public class RewardPointControlActivity extends AppCompatActivity {
     private TextView textViewCurrentPt;
     private EditText editTextAdd, editTextDeduct;
     private Button buttonAdd, buttonDeduct;
-    private RewardPointHelper rewardPointHelper;
+    private RewardPointConfig rewardPointConfig;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +33,7 @@ public class RewardPointControlActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        rewardPointHelper = new RewardPointHelper(getBaseContext());
+        rewardPointConfig = new RewardPointConfig(getBaseContext());
 
         textViewCurrentPt = findViewById(R.id.textView_current_reward_points);
 
@@ -47,7 +45,7 @@ public class RewardPointControlActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    rewardPointHelper.setRewardPoints(rewardPointHelper.getCurrentPoints() + Integer.parseInt(editTextAdd.getText().toString()));
+                    rewardPointConfig.setRewardPoints(rewardPointConfig.getCurrentPoints() + Integer.parseInt(editTextAdd.getText().toString()));
                     editTextAdd.setText("");
                     updateText();
                 }catch (NumberFormatException e){
@@ -61,12 +59,12 @@ public class RewardPointControlActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try{
-                    int currentPoints = rewardPointHelper.getCurrentPoints();
+                    int currentPoints = rewardPointConfig.getCurrentPoints();
                     int deductPoints = Integer.parseInt(editTextDeduct.getText().toString());
                     if (currentPoints - deductPoints >= 0){
-                        rewardPointHelper.setRewardPoints(currentPoints - deductPoints);
+                        rewardPointConfig.setRewardPoints(currentPoints - deductPoints);
                     }else{
-                        rewardPointHelper.setRewardPoints(0);
+                        rewardPointConfig.setRewardPoints(0);
                     }
                     editTextDeduct.setText("");
                     updateText();
@@ -91,6 +89,6 @@ public class RewardPointControlActivity extends AppCompatActivity {
     }
 
     private void updateText(){
-        textViewCurrentPt.setText(String.valueOf(rewardPointHelper.getCurrentPoints()));
+        textViewCurrentPt.setText(String.valueOf(rewardPointConfig.getCurrentPoints()));
     }
 }

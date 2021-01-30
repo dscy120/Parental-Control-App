@@ -54,4 +54,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_appSelect"
         app:layout_constraintVertical_bias="0.285" />
+
+    <Button
+        android:id="@+id/button_question_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Question Bank"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_set_reward_point"
+        app:layout_constraintVertical_bias="0.365" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,12 +5,12 @@ import android.content.SharedPreferences;
 
 import androidx.preference.PreferenceManager;
 
-public class RewardPointHelper {
+public class RewardPointConfig {
     private SharedPreferences sharedPreferences;
 
     public static final String REWARD_POINTS = "reward_points";
 
-    public RewardPointHelper(Context context){
+    public RewardPointConfig(Context context){
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 

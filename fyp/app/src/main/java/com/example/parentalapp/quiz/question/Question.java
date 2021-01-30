@@ -16,7 +16,9 @@ public class Question {
     public Question(){}
 
     // Options can be null for questions with no option (e.g. fill in the blanks)
-    public Question(int id, int questionType, String questionCategory, String question, @Nullable String option1, @Nullable String option2, @Nullable String option3, @Nullable String option4, String correctAns){
+    public Question(int id, int questionType, String questionCategory, String question,
+                    @Nullable String option1, @Nullable String option2, @Nullable String option3,
+                    @Nullable String option4, String correctAns){
         this.id = id;
         this.questionType = questionType;
         this.questionCategory = questionCategory;

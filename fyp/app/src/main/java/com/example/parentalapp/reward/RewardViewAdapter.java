@@ -61,7 +61,6 @@ public class RewardViewAdapter extends RecyclerView.Adapter<RewardViewAdapter.Re
 
         holder.name.setText(rewardItem.getName());
         holder.point.setText(String.valueOf(rewardItem.getPoint()));
-
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.parentalapp.database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -108,6 +109,10 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
     public Cursor query(String sql){
         return db.rawQuery(sql, null);
+    }
+
+    public void execSQL(String table, ContentValues cv){
+        db.insert(table, null, cv);
     }
 
 }

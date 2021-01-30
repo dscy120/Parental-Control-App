@@ -11,10 +11,10 @@ import java.util.List;
 public class RewardDBHelper extends DatabaseOpenHelper {
 
     public static final String REWARD_ITEM_ID = "id";
-    final public static String REWARD_ITEM_NAME = "name";
-    final public static String REWARD_ITEM_POINT = "point";
-    final public static String REWARD_EFFECT_ITEM = "effect_item";
-    final public static String REWARD_EFFECT_VALUE = "effect_value";
+    public static final String REWARD_ITEM_NAME = "name";
+    public static final String REWARD_ITEM_POINT = "point";
+    public static final String REWARD_EFFECT_ITEM = "effect_item";
+    public static final String REWARD_EFFECT_VALUE = "effect_value";
 
     public RewardDBHelper(Context context) {
         super(context);

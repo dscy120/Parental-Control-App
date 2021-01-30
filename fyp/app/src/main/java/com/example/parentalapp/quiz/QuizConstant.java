@@ -15,6 +15,7 @@ public final class QuizConstant {
         public static final String COLUMN_OPTION3 = "option3";
         public static final String COLUMN_OPTION4 = "option4";
         public static final String COLUMN_ANSWER = "answer";
+        public static final String COLUMN_EXPLANATION = "explanation";
 
         // constant for record
         public static final String TABLE_NAME_RECORD = "record";
