@@ -7,14 +7,16 @@ public class QuestionBankSource {
     private String title;
     private String publisher;
     private String downloadLink;
+    private int downloadStatus;
 
-    public QuestionBankSource(int id, String subject, String level, String title, String publisher, String downloadLink) {
+    public QuestionBankSource(int id, String subject, String level, String title, String publisher, String downloadLink, int downloadStatus) {
         this.id = id;
         this.subject = subject;
         this.level = level;
         this.title = title;
         this.publisher = publisher;
         this.downloadLink = downloadLink;
+        this.downloadStatus = downloadStatus;
     }
 
     public int getId() {
@@ -39,5 +41,9 @@ public class QuestionBankSource {
 
     public String getDownloadLink() {
         return downloadLink;
+    }
+
+    public int getDownloadStatus() {
+        return downloadStatus;
     }
 }

@@ -4,6 +4,7 @@ import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ public class QuestionBankViewAdapter extends RecyclerView.Adapter<QuestionBankVi
 
     public static class QuestionBankViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public TextView title, subject, level;
+        public ImageView check;
         QuestionBankClickListener questionBankClickListener;
 
         public QuestionBankViewHolder(View itemView, QuestionBankClickListener questionBankClickListener){
@@ -32,6 +34,8 @@ public class QuestionBankViewAdapter extends RecyclerView.Adapter<QuestionBankVi
             subject = itemView.findViewById(R.id.textView_exercise_subject);
             level = itemView.findViewById(R.id.textView_exercise_level);
             title = itemView.findViewById(R.id.textView_exercise_title);
+
+            check = itemView.findViewById(R.id.imageView_checked);
 
             this.questionBankClickListener = questionBankClickListener;
 
@@ -59,6 +63,9 @@ public class QuestionBankViewAdapter extends RecyclerView.Adapter<QuestionBankVi
         holder.subject.setText(questionBankSource.getSubject());
         holder.level.setText(questionBankSource.getLevel());
         holder.title.setText(questionBankSource.getTitle());
+        if(questionBankSource.getDownloadStatus() == 0){
+            holder.check.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override

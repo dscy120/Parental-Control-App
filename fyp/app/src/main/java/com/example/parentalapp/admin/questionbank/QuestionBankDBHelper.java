@@ -30,6 +30,7 @@ public class QuestionBankDBHelper extends DatabaseOpenHelper {
     public static final String SOURCE_LEVEL = "level";
     public static final String SOURCE_PUBLISHER = "publisher";
     public static final String SOURCE_DOWNLAOD_LINK = "download_link";
+    public static final String SOURCE_DOWNLOAD_STATUS = "download_status";
 
     // old https://drive.google.com/file/d/1R-a2OVDeOKw2e49W9WjC-owsKsZwjpuL/view?usp=sharing
     // new https://drive.google.com/file/d/16BwVWtWM7P45WnfIPkOx5o5tZIbMrneT/view?usp=sharing
@@ -54,7 +55,8 @@ public class QuestionBankDBHelper extends DatabaseOpenHelper {
                 String title = c.getString(c.getColumnIndex(SOURCE_TITLE));
                 String publisher = c.getString(c.getColumnIndex(SOURCE_PUBLISHER));
                 String downloadLink = c.getString(c.getColumnIndex(SOURCE_DOWNLAOD_LINK));
-                QuestionBankSource q = new QuestionBankSource(id, subject, level, title, publisher, downloadLink);
+                int downloadStatus = c.getInt(c.getColumnIndex(SOURCE_DOWNLOAD_STATUS));
+                QuestionBankSource q = new QuestionBankSource(id, subject, level, title, publisher, downloadLink, downloadStatus);
                 sourceList.add(q);
             }while(c.moveToNext());
         }
