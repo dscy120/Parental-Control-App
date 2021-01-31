@@ -7,6 +7,53 @@
     tools:context=".admin.questionbank.QuestionBankActivity">
 
     <TextView
+        android:id="@+id/textView_exercise_title2"
+        android:layout_width="156dp"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:textSize="18sp"
+        android:background="@drawable/box"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView_exercise_level2"
+        app:layout_constraintTop_toBottomOf="@+id/textView26"
+        app:layout_constraintVertical_bias="0.047" />
+
+    <TextView
+        android:id="@+id/textView_exercise_level2"
+        android:layout_width="98dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="152dp"
+        android:layout_marginRight="152dp"
+        android:text="Level"
+        android:textSize="18sp"
+        android:background="@drawable/box"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView_header_subject"
+        app:layout_constraintTop_toBottomOf="@+id/textView26"
+        app:layout_constraintVertical_bias="0.047" />
+
+    <TextView
+        android:id="@+id/textView_header_subject"
+        android:layout_width="98dp"
+        android:layout_height="wrap_content"
+        android:text="Subject"
+        android:textSize="18sp"
+        android:background="@drawable/box"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView26"
+        app:layout_constraintVertical_bias="0.047" />
+
+    <TextView
         android:id="@+id/textView25"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,15 +87,4 @@
         app:layout_constraintTop_toBottomOf="@+id/textView25"
         app:layout_constraintVertical_bias="0.237" />
 
-    <Button
-        android:id="@+id/button_temp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.218" />
 </androidx.constraintlayout.widget.ConstraintLayout>

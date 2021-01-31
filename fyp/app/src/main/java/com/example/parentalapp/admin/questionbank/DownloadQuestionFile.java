@@ -27,6 +27,7 @@ public class DownloadQuestionFile extends AsyncTask<String, String, String> {
     private QuestionBankDBHelper questionBankDBHelper;
     private Context context;
     private TaskDelegate delegate;
+    private String parentFilePath = "/sdcard/";
 
     public DownloadQuestionFile(Context context, TaskDelegate delegate){
         this.context = context;
@@ -42,6 +43,7 @@ public class DownloadQuestionFile extends AsyncTask<String, String, String> {
 
     @Override
     protected String doInBackground(String... url) {
+        String savedFilePath = parentFilePath + url[1] + ".xls";
         try{
             InputStream inputStream = null;
             OutputStream outputStream = null;
@@ -58,7 +60,7 @@ public class DownloadQuestionFile extends AsyncTask<String, String, String> {
                 int fileLength = connection.getContentLength();
 
                 inputStream = connection.getInputStream();
-                outputStream = new FileOutputStream("/sdcard/question.xls");
+                outputStream = new FileOutputStream(savedFilePath);
 
                 byte data[] = new byte[4096];
                 long total = 0;
@@ -86,12 +88,12 @@ public class DownloadQuestionFile extends AsyncTask<String, String, String> {
         }catch (Exception e){
             e.printStackTrace();
         }
-        return null;
+        return savedFilePath;
     }
 
     @Override
     protected void onPostExecute(String s) {
-        int sourceId = questionBankDBHelper.insertQuestion("/sdcard/question.xls");
+        int sourceId = questionBankDBHelper.insertQuestion(s);
         Toast.makeText(context, "Download Completed", Toast.LENGTH_SHORT).show();
         delegate.taskCompleteNotify(String.valueOf(sourceId));
         //questionBankDBHelper.insertQuestion("/sdcard/Download/question.xls");

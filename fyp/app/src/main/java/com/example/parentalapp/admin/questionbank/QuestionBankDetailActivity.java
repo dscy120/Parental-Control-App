@@ -78,7 +78,7 @@ public class QuestionBankDetailActivity extends AppCompatActivity implements Dow
             public void onClick(View v) {
 
                 //questionBankDBHelper.downloadQuestion(getIntent().getExtras().getString(SOURCE_DOWNLAOD_LINK));\
-                new DownloadQuestionFile(getApplicationContext(), taskDelegate).execute(q.getDownloadLink());
+                new DownloadQuestionFile(getApplicationContext(), taskDelegate).execute(q.getDownloadLink(), String.valueOf(q.getId()));
                 Toast.makeText(getApplicationContext(), "Download started", Toast.LENGTH_SHORT).show();
             }
         });

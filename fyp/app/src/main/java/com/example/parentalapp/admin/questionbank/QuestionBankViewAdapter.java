@@ -17,7 +17,7 @@ import java.util.List;
 
 public class QuestionBankViewAdapter extends RecyclerView.Adapter<QuestionBankViewAdapter.QuestionBankViewHolder> {
     private ArrayList<QuestionBankSource> sourceList;
-    private QuestionBankClickListener questionBankClickListener;
+    private final QuestionBankClickListener questionBankClickListener;
 
     public QuestionBankViewAdapter(ArrayList<QuestionBankSource> sourceList, QuestionBankClickListener questionBankClickListener) {
         this.sourceList = sourceList;
