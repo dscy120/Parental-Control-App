@@ -104,4 +104,8 @@ public class PlaygroundActivity extends AppCompatActivity implements PlaygroundV
         i.setComponent(name);
         startActivity(i);
     }
+
+    public void stopTimerService(View v){
+        stopService(new Intent(PlaygroundActivity.this, ScreenTimeService.class));
+    }
 }

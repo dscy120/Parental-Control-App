@@ -58,9 +58,13 @@ public class RewardResultActivity extends AppCompatActivity {
         if(c.moveToFirst()){
             effectItem = c.getString(c.getColumnIndex(REWARD_EFFECT_ITEM));
             if(effectItem.compareTo("time") == 0){
+                // change screen time parameters
                 effectValue = c.getString(c.getColumnIndex(REWARD_EFFECT_VALUE));
                 TimeSettingHelper timeSettingHelper = new TimeSettingHelper(getApplicationContext());
                 timeSettingHelper.addRemainingScreenTime(Long.parseLong(effectValue) * quantity);
+            }else if (effectItem.compareTo("app") == 0){
+                // add chosen app in playground
+
             }
         }
         deductPoint();

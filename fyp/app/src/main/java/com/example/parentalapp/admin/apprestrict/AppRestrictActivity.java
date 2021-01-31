@@ -27,8 +27,7 @@ import com.example.parentalapp.admin.ParentMainActivity;
 import java.util.List;
 
 public class AppRestrictActivity extends AppCompatActivity {
-    private static SharedPreferences sharedPreferences;
-    private static SharedPreferences.Editor editor;
+    private static AppRestrictConfig appRestrictConfig;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +43,7 @@ public class AppRestrictActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        sharedPreferences = getSharedPreferences("appPreference", MODE_PRIVATE);
-        editor = sharedPreferences.edit();
-
+        appRestrictConfig = new AppRestrictConfig(this);
     }
 
     @Override
@@ -97,7 +94,7 @@ public class AppRestrictActivity extends AppCompatActivity {
                     checkBoxPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                         @Override
                         public boolean onPreferenceChange(Preference preference, Object newValue) {
-                            editor.putBoolean(appName, (boolean)newValue).apply();
+                            appRestrictConfig.changePermission(appName, (boolean)newValue);
                             return true;
                         }
                     });
