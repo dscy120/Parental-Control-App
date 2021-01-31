@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.parentalapp.MainActivity;
@@ -15,8 +17,17 @@ import com.example.parentalapp.R;
 
 import java.util.ArrayList;
 
+import static com.example.parentalapp.admin.questionbank.QuestionBankDBHelper.SOURCE_ID;
+import static com.example.parentalapp.admin.questionbank.QuestionBankDBHelper.SOURCE_TITLE;
+import static com.example.parentalapp.admin.questionbank.QuestionBankDBHelper.SOURCE_SUBJECT;
+import static com.example.parentalapp.admin.questionbank.QuestionBankDBHelper.SOURCE_LEVEL;
+import static com.example.parentalapp.admin.questionbank.QuestionBankDBHelper.SOURCE_PUBLISHER;
+import static com.example.parentalapp.admin.questionbank.QuestionBankDBHelper.SOURCE_DOWNLAOD_LINK;
+import static com.example.parentalapp.admin.questionbank.QuestionBankDBHelper.SOURCE_DOWNLOAD_STATUS;
+
 public class QuestionBankActivity extends AppCompatActivity implements QuestionBankViewAdapter.QuestionBankClickListener {
 
+    private int positionClicked;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -47,6 +58,12 @@ public class QuestionBankActivity extends AppCompatActivity implements QuestionB
     }
 
     @Override
+    protected void onRestart() {
+        super.onRestart();
+        adapter.notifyItemChanged(positionClicked);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -59,6 +76,13 @@ public class QuestionBankActivity extends AppCompatActivity implements QuestionB
 
     @Override
     public void onBankClick(int position) {
-        //TODO: show source detail
+        //show source detail
+        positionClicked = position;
+        QuestionBankSource questionBankSource = sourceList.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putInt(SOURCE_ID, questionBankSource.getId());
+        Intent i = new Intent(getApplicationContext(), QuestionBankDetailActivity.class);
+        i.putExtras(bundle);
+        startActivity(i);
     }
 }

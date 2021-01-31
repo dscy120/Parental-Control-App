@@ -115,4 +115,8 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         db.insert(table, null, cv);
     }
 
+    public int updateSQL(String table, ContentValues cv, int id){
+        return db.update(table, cv, "id = ?", new String[] {String.valueOf(id)});
+    }
+
 }

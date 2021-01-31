@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".admin.questionbank.QuestionBankActivity"></activity>
+        <activity android:name=".admin.questionbank.QuestionBankDetailActivity"></activity>
+        <activity android:name=".admin.questionbank.QuestionBankActivity" />
         <activity android:name=".reward.RewardResultActivity" />
         <activity android:name=".admin.rewardpoint.RewardPointControlActivity" />
         <activity android:name=".reward.RewardDetailActivity" />

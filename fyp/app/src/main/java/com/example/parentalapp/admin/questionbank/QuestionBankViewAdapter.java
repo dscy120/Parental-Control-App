@@ -58,6 +58,8 @@ public class QuestionBankViewAdapter extends RecyclerView.Adapter<QuestionBankVi
 
     @Override
     public void onBindViewHolder(@NonNull QuestionBankViewHolder holder, int position) {
+        QuestionBankDBHelper questionBankDBHelper = new QuestionBankDBHelper(holder.subject.getContext());
+        sourceList = questionBankDBHelper.getSource();
         QuestionBankSource questionBankSource = sourceList.get(position);
 
         holder.subject.setText(questionBankSource.getSubject());
