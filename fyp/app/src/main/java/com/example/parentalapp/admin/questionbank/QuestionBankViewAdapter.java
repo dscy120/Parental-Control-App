@@ -33,6 +33,8 @@ public class QuestionBankViewAdapter extends RecyclerView.Adapter<QuestionBankVi
             level = itemView.findViewById(R.id.textView_exercise_level);
             title = itemView.findViewById(R.id.textView_exercise_title);
 
+            this.questionBankClickListener = questionBankClickListener;
+
             itemView.setOnClickListener(this);
         }
 
@@ -55,7 +57,7 @@ public class QuestionBankViewAdapter extends RecyclerView.Adapter<QuestionBankVi
         QuestionBankSource questionBankSource = sourceList.get(position);
 
         holder.subject.setText(questionBankSource.getSubject());
-        holder.level.setText(questionBankSource.getSubject());
+        holder.level.setText(questionBankSource.getLevel());
         holder.title.setText(questionBankSource.getTitle());
     }
 
