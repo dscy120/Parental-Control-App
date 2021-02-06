@@ -65,6 +65,8 @@ public class RewardResultActivity extends AppCompatActivity {
             }else if (effectItem.compareTo("app") == 0){
                 // add chosen app in playground
 
+            }else if (effectItem.compareTo("custom") == 0){
+                // reward set by admin user
             }
         }
         deductPoint();

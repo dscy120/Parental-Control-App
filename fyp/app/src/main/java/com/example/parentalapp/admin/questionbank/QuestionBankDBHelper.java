@@ -1,20 +1,14 @@
 package com.example.parentalapp.admin.questionbank;
 
-import android.app.DownloadManager;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Environment;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
 import com.example.parentalapp.database.DatabaseOpenHelper;
 import com.example.parentalapp.quiz.QuizConstant;
-import com.example.parentalapp.quiz.question.Question;
 
 import java.io.File;
 import java.io.IOException;
@@ -146,8 +140,11 @@ public class QuestionBankDBHelper extends DatabaseOpenHelper {
         cv.put(QuizConstant.QuestionTable.COLUMN_ANSWER, correctAns);
         cv.put(QuizConstant.QuestionTable.COLUMN_EXPLANATION, explanation);
         cv.put(QuizConstant.QuestionTable.COLUMN_SOURCE_ID, sourceId);
-        execSQL(QuizConstant.QuestionTable.TABLE_NAME, cv);
-        updateStatus(sourceId, 1);
+        if (insertSQL(QuizConstant.QuestionTable.TABLE_NAME, cv)){
+            updateStatus(sourceId, 1);
+        }else{
+            Toast.makeText(context, "Unable to add question", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public int updateStatus(int id, int status){

@@ -13,12 +13,13 @@ import com.example.parentalapp.MainActivity;
 import com.example.parentalapp.R;
 import com.example.parentalapp.admin.apprestrict.AppRestrictActivity;
 import com.example.parentalapp.admin.questionbank.QuestionBankActivity;
+import com.example.parentalapp.admin.rewarditem.RewardItemConfigActivity;
 import com.example.parentalapp.admin.rewardpoint.RewardPointControlActivity;
 import com.example.parentalapp.admin.screentime.GeneralSettingsActivity;
 
 public class ParentMainActivity extends AppCompatActivity {
 
-    Button timeSettings, appSelect, setRewardPoint, questionSetting;
+    Button timeSettings, appSelect, setRewardPoint, questionSetting, rewardItemSetting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,14 @@ public class ParentMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), QuestionBankActivity.class));
+            }
+        });
+
+        rewardItemSetting = findViewById(R.id.button_reward_item_setting);
+        rewardItemSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), RewardItemConfigActivity.class));
             }
         });
     }

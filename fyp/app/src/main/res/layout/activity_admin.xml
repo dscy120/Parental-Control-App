@@ -26,10 +26,9 @@
         android:text="App Selection"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_timeSettings"
-        app:layout_constraintVertical_bias="0.21" />
+        app:layout_constraintVertical_bias="0.082" />
 
     <TextView
         android:id="@+id/textView3"
@@ -50,10 +49,9 @@
         android:text="Set Reward Point"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_appSelect"
-        app:layout_constraintVertical_bias="0.285" />
+        app:layout_constraintVertical_bias="0.098" />
 
     <Button
         android:id="@+id/button_question_setting"
@@ -62,8 +60,19 @@
         android:text="Question Bank"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_reward_item_setting"
+        app:layout_constraintVertical_bias="0.214" />
+
+    <Button
+        android:id="@+id/button_reward_item_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reward Item"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_set_reward_point"
-        app:layout_constraintVertical_bias="0.365" />
+        app:layout_constraintVertical_bias="0.121" />
 </androidx.constraintlayout.widget.ConstraintLayout>

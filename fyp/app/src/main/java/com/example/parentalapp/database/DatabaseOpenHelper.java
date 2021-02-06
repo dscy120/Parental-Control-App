@@ -111,8 +111,12 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         return db.rawQuery(sql, null);
     }
 
-    public void execSQL(String table, ContentValues cv){
-        db.insert(table, null, cv);
+    public boolean insertSQL(String table, ContentValues cv){
+        return db.insert(table, null, cv) > 0;
+    }
+
+    public boolean deleteSQL(String table, String key, String value){
+        return db.delete(table, key + "=" + value, null) > 0;
     }
 
     public int updateSQL(String table, ContentValues cv, int id){
