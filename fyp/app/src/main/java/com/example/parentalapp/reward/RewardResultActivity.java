@@ -11,6 +11,7 @@ import android.widget.Button;
 import com.example.parentalapp.R;
 import com.example.parentalapp.admin.rewardpoint.RewardPointConfig;
 import com.example.parentalapp.admin.screentime.TimeSettingHelper;
+import com.example.parentalapp.reward.rewardhistory.RewardHistoryDBHelper;
 
 import static com.example.parentalapp.reward.RewardMainActivity.ITEM_NAME;
 import static com.example.parentalapp.reward.RewardMainActivity.POINTS;
@@ -70,10 +71,16 @@ public class RewardResultActivity extends AppCompatActivity {
             }
         }
         deductPoint();
+        addToHistory();
     }
 
     private void deductPoint(){
         RewardPointConfig rewardPointConfig = new RewardPointConfig(getApplicationContext());
         rewardPointConfig.deductRewardPoints(point * quantity);
+    }
+
+    private void addToHistory(){
+        RewardHistoryDBHelper rewardHistoryDBHelper = new RewardHistoryDBHelper(getApplicationContext());
+        rewardHistoryDBHelper.addRecord(itemName, id);
     }
 }

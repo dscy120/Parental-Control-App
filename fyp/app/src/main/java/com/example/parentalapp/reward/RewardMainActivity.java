@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.parentalapp.MainActivity;
 import com.example.parentalapp.R;
+import com.example.parentalapp.reward.rewardhistory.RewardHistoryActivity;
 
 import java.util.ArrayList;
 
@@ -73,7 +74,7 @@ public class RewardMainActivity extends AppCompatActivity implements RewardViewA
         button_test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: show purchase history
+                startActivity(new Intent(getApplicationContext(), RewardHistoryActivity.class));
             }
         });
 
