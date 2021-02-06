@@ -67,7 +67,7 @@ public class QuestionBankActivity extends AppCompatActivity implements QuestionB
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                startActivity(new Intent(this, MainActivity.class));
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

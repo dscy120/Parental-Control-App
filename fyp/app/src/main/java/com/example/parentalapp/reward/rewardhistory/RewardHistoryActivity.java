@@ -52,7 +52,7 @@ public class RewardHistoryActivity extends AppCompatActivity implements RewardHi
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                startActivity(new Intent(this, RewardMainActivity.class));
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
