@@ -24,4 +24,6 @@
     <color name="AdminMainTheme_Orange_1">#ffb26b</color>
     <color name="AdminMainTheme_Yellow_1">#ffd56b</color>
     <color name="AdminMainTheme_Green_1">#939b62</color>
+    
+    <color name="RewardMainTheme_Blue_1">#00bcd4</color>
 </resources>

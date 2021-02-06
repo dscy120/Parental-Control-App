@@ -22,8 +22,12 @@
 
     <Button
         android:id="@+id/button_doquiz"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="329dp"
+        android:layout_height="81dp"
+        android:paddingLeft="30dip"
+        android:paddingRight="26dip"
+        android:drawableLeft="@drawable/school_24px"
+        android:background="@drawable/card_green_2"
         android:text="Do Quiz"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -35,8 +39,12 @@
 
     <Button
         android:id="@+id/button_record"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="329dp"
+        android:layout_height="81dp"
+        android:paddingLeft="30dip"
+        android:paddingRight="26dip"
+        android:drawableLeft="@drawable/school_24px"
+        android:background="@drawable/card_green_3"
         android:text="History"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"

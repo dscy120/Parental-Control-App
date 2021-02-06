@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/QuizMainTheme_Green_1"
     tools:context=".quiz.QuizSelectionActivity">
 
     <TextView
@@ -43,6 +44,7 @@
         android:id="@+id/button_confirm_quiz_select"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/card_green_4"
         android:text="Confirm"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

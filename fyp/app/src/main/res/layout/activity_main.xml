@@ -82,6 +82,7 @@
         android:drawableLeft="@drawable/reward_24px"
         android:drawablePadding="2dip"
         android:text="Reward Store"
+        android:textAllCaps="false"
         android:background="@drawable/card_green_4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
