@@ -49,6 +49,8 @@
         android:id="@+id/recyclerView_rewardList"
         android:layout_width="match_parent"
         android:layout_height="399dp"
+        android:background="@drawable/card_green"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

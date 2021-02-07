@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.parentalapp.MainActivity;
 import com.example.parentalapp.R;
 import com.example.parentalapp.database.DatabaseOpenHelper;
 import com.example.parentalapp.quiz.QuizConstant;
@@ -75,7 +76,8 @@ public class AttemptDetailActivity extends AppCompatActivity implements AttemptV
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                startActivity(new Intent(getApplicationContext(), RecordMainActivity.class));
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

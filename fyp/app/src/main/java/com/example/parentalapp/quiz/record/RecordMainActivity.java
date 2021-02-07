@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.parentalapp.MainActivity;
 import com.example.parentalapp.R;
 import com.example.parentalapp.database.DatabaseOpenHelper;
 import com.example.parentalapp.quiz.QuizMainActivity;
@@ -63,7 +64,8 @@ public class RecordMainActivity extends AppCompatActivity implements RecordViewA
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                startActivity(new Intent(getApplicationContext(), QuizMainActivity.class));
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

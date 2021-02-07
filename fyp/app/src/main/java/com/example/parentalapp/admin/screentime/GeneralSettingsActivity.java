@@ -2,6 +2,7 @@ package com.example.parentalapp.admin.screentime;
 
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,7 +16,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import com.example.parentalapp.MainActivity;
 import com.example.parentalapp.R;
+import com.example.parentalapp.admin.ParentMainActivity;
 
 
 public class GeneralSettingsActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
@@ -55,7 +58,8 @@ public class GeneralSettingsActivity extends AppCompatActivity implements TimePi
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                startActivity(new Intent(getApplicationContext(), ParentMainActivity.class));
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

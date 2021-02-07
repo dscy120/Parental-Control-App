@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.parentalapp.MainActivity;
 import com.example.parentalapp.R;
 import com.example.parentalapp.admin.ParentMainActivity;
 import com.example.parentalapp.reward.RewardDBHelper;
@@ -54,7 +55,8 @@ public class AddRewardItemActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                startActivity(new Intent(getApplicationContext(), RewardItemConfigActivity.class));
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

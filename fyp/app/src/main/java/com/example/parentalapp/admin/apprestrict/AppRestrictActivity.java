@@ -21,6 +21,7 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 
+import com.example.parentalapp.MainActivity;
 import com.example.parentalapp.R;
 import com.example.parentalapp.admin.ParentMainActivity;
 
@@ -50,7 +51,8 @@ public class AppRestrictActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                startActivity(new Intent(getApplicationContext(), ParentMainActivity.class));
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

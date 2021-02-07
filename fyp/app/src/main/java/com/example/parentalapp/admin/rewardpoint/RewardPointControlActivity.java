@@ -3,6 +3,7 @@ package com.example.parentalapp.admin.rewardpoint;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,7 +12,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.parentalapp.MainActivity;
 import com.example.parentalapp.R;
+import com.example.parentalapp.admin.ParentMainActivity;
 
 public class RewardPointControlActivity extends AppCompatActivity {
 
@@ -79,7 +82,8 @@ public class RewardPointControlActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                startActivity(new Intent(getApplicationContext(), ParentMainActivity.class));
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

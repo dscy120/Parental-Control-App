@@ -84,12 +84,8 @@ public class RewardMainActivity extends AppCompatActivity implements RewardViewA
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                /*
                 startActivity(new Intent(this, MainActivity.class));
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-
-                 */
-                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
