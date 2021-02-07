@@ -12,9 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.parentalapp.MainActivity;
 import com.example.parentalapp.R;
-import com.example.parentalapp.admin.ParentMainActivity;
 import com.example.parentalapp.reward.RewardDBHelper;
 import com.example.parentalapp.reward.RewardItem;
 import com.example.parentalapp.reward.RewardViewAdapter;
@@ -33,7 +31,7 @@ public class RewardItemConfigActivity extends AppCompatActivity implements Rewar
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reward_item_config);
+        setContentView(R.layout.activity_admin_reward_item_config);
 
         // back button
         ActionBar actionBar = getSupportActionBar();

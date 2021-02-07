@@ -2,7 +2,6 @@ package com.example.parentalapp.admin.screentime;
 
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.parentalapp.R;
-import com.example.parentalapp.admin.ParentMainActivity;
 
 
 public class GeneralSettingsActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
@@ -31,7 +29,7 @@ public class GeneralSettingsActivity extends AppCompatActivity implements TimePi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_admin_time_settings);
 
         timeSettingHelper = new TimeSettingHelper(getBaseContext());
 
