@@ -73,6 +73,11 @@ public class QuestionDisplayActivity extends AppCompatActivity implements Fragme
 
     }
 
+    @Override
+    public void onBackPressed() {
+        // do nothing
+    }
+
     // When the Fragment returns the answer
     @Override
     public void onInputSent(CharSequence[] input) {
