@@ -39,6 +39,7 @@ public class AppRestrictActivity extends AppCompatActivity {
                 .beginTransaction()
                 .replace(R.id.appRestrict, new SettingsFragment())
                 .commit();
+        // top back button
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -80,7 +81,7 @@ public class AppRestrictActivity extends AppCompatActivity {
             activityContext.getTheme().resolveAttribute(R.attr.preferenceTheme, themeTypedValue, true);
             ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(activityContext, themeTypedValue.resourceId);
             PreferenceCategory preferenceCategory = new PreferenceCategory(contextThemeWrapper);
-            preferenceCategory.setTitle("Category Test");
+            preferenceCategory.setTitle("Allowed Apps");
 
             getPreferenceScreen().addPreference(preferenceCategory);
 

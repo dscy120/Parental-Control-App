@@ -16,6 +16,7 @@ public class RewardDBHelper extends DatabaseOpenHelper {
     public static final String REWARD_ITEM_POINT = "point";
     public static final String REWARD_EFFECT_ITEM = "effect_item";
     public static final String REWARD_EFFECT_VALUE = "effect_value";
+    public static final String REWARD_APP_POSITION = "position";
 
     public RewardDBHelper(Context context) {
         super(context);

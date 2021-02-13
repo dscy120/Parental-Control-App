@@ -7,8 +7,10 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.parentalapp.R;
+import com.example.parentalapp.admin.apprestrict.AppRestrictConfig;
 import com.example.parentalapp.admin.rewardpoint.RewardPointConfig;
 import com.example.parentalapp.admin.screentime.TimeSettingHelper;
 import com.example.parentalapp.reward.rewardhistory.RewardHistoryDBHelper;
@@ -26,6 +28,7 @@ public class RewardResultActivity extends AppCompatActivity {
     private RewardDBHelper rewardDBHelper;
     private String itemName, effectItem, effectValue;
     private int id, quantity, point;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,7 @@ public class RewardResultActivity extends AppCompatActivity {
         changeEffectItem();
     }
 
+    // getting reward details
     private void initialize(){
         id = getIntent().getExtras().getInt(REWARD_ITEM_ID);
         itemName = getIntent().getExtras().getString(ITEM_NAME);
@@ -54,20 +58,27 @@ public class RewardResultActivity extends AppCompatActivity {
         point = Integer.parseInt(getIntent().getExtras().getString(POINTS));
     }
 
+    // process the reward
     private void changeEffectItem(){
         Cursor c = rewardDBHelper.getItemDetail(REWARD_ITEM_ID, String.valueOf(id));
         if(c.moveToFirst()){
             effectItem = c.getString(c.getColumnIndex(REWARD_EFFECT_ITEM));
+
+            // check type of reward item
             if(effectItem.compareTo("time") == 0){
-                // change screen time parameters
+                // screen time reward
                 effectValue = c.getString(c.getColumnIndex(REWARD_EFFECT_VALUE));
                 TimeSettingHelper timeSettingHelper = new TimeSettingHelper(getApplicationContext());
                 timeSettingHelper.addRemainingScreenTime(Long.parseLong(effectValue) * quantity);
             }else if (effectItem.compareTo("app") == 0){
-                // add chosen app in playground
-
+                // app restriction reward
+                // TODO: allow user to choose app
+                AppRestrictConfig appRestrictConfig = new AppRestrictConfig(this);
+                appRestrictConfig.changePermission(itemName, true);
             }else if (effectItem.compareTo("custom") == 0){
-                // reward set by admin user
+                // custom reward
+                // TODO: put reward into unresolved list
+
             }
         }
         deductPoint();

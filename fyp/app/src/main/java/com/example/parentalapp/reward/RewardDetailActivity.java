@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.parentalapp.MainActivity;
 import com.example.parentalapp.R;
 
+import static com.example.parentalapp.reward.RewardDBHelper.REWARD_EFFECT_ITEM;
 import static com.example.parentalapp.reward.RewardMainActivity.ALLOWANCE;
 import static com.example.parentalapp.reward.RewardMainActivity.ITEM_NAME;
 import static com.example.parentalapp.reward.RewardMainActivity.POINTS;
@@ -22,9 +23,9 @@ import static com.example.parentalapp.reward.RewardDBHelper.REWARD_ITEM_ID;
 
 public class RewardDetailActivity extends AppCompatActivity implements RewardConfirmDialog.RewardConfirmDialogListener{
 
-    private TextView textViewquantity, textViewItem, textViewPoint;
+    private TextView textViewquantity, textViewItem, textViewPoint, textViewTime;
     private int id, itemQuantity, requiredPoints, allowance;
-    private String itemName;
+    private String itemName, effectItem;
     private Bundle bundleRewardDetail;
 
     @Override
@@ -32,7 +33,7 @@ public class RewardDetailActivity extends AppCompatActivity implements RewardCon
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reward_detail);
 
-        //back button
+        // top back button
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -44,20 +45,23 @@ public class RewardDetailActivity extends AppCompatActivity implements RewardCon
 
     private void initialize(){
         // set TextView
-
         textViewquantity = findViewById(R.id.textView_dialog_item_quantity);
         textViewItem = findViewById(R.id.textView_dialog_item_name);
         textViewPoint = findViewById(R.id.textView_dialog_required_points);
+        textViewTime = findViewById(R.id.textView_effective_time);
 
+        // get item details from previous activity
         id = getIntent().getExtras().getInt(REWARD_ITEM_ID);
         requiredPoints = getIntent().getExtras().getInt(POINTS);
         itemName = getIntent().getExtras().getString(ITEM_NAME);
         itemQuantity = 0;
         allowance = getIntent().getExtras().getInt(ALLOWANCE);
+        effectItem = getIntent().getExtras().getString(REWARD_EFFECT_ITEM);
 
         updateText();
     }
 
+    // back button
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -70,12 +74,19 @@ public class RewardDetailActivity extends AppCompatActivity implements RewardCon
         }
     }
 
+    // refresh textView content
     private void updateText(){
         textViewItem.setText(itemName);
         textViewPoint.setText("Required points: " + (requiredPoints * itemQuantity) );
         textViewquantity.setText(String.valueOf(itemQuantity));
+        if(effectItem.compareTo("time") == 0){
+            textViewTime.setText("Total: " + 15 * itemQuantity + " minutes");
+        }else{
+            textViewTime.setText("");
+        }
     }
 
+    // set add and minus button function
     private void setButtons(){
         Button button_add = findViewById(R.id.button_add_item_quantity);
         button_add.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +95,7 @@ public class RewardDetailActivity extends AppCompatActivity implements RewardCon
                 if(requiredPoints * (itemQuantity + 1) <= allowance){
                     itemQuantity++;
                 }else{
-                    Toast.makeText(getApplicationContext(), "You don't have enough points", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "You don't have enough points!", Toast.LENGTH_SHORT).show();
                 }
                 updateText();
             }
@@ -114,6 +125,7 @@ public class RewardDetailActivity extends AppCompatActivity implements RewardCon
         });
     }
 
+    // opening the confirmation dialog
     private void launchConfirmDialog(){
         RewardConfirmDialog rewardConfirmDialog = new RewardConfirmDialog();
         bundleRewardDetail = new Bundle();
@@ -125,9 +137,9 @@ public class RewardDetailActivity extends AppCompatActivity implements RewardCon
         rewardConfirmDialog.show(getSupportFragmentManager(), "Reward Confirm Dialog");
     }
 
+    // operation of the purchase
     @Override
     public void purchase() {
-        // TODO: purchase action
         Intent i = new Intent(this, RewardResultActivity.class);
         i.putExtras(bundleRewardDetail);
         startActivity(i);

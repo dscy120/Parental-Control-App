@@ -16,11 +16,13 @@ import android.widget.TextView;
 
 import com.example.parentalapp.MainActivity;
 import com.example.parentalapp.R;
+import com.example.parentalapp.reward.apprestrict.RewardDetailAppActivity;
 import com.example.parentalapp.reward.rewardhistory.RewardHistoryActivity;
 
 import java.util.ArrayList;
 
 import static com.example.parentalapp.admin.rewardpoint.RewardPointConfig.REWARD_POINTS;
+import static com.example.parentalapp.reward.RewardDBHelper.REWARD_EFFECT_ITEM;
 import static com.example.parentalapp.reward.RewardDBHelper.REWARD_ITEM_ID;
 
 public class RewardMainActivity extends AppCompatActivity implements RewardViewAdapter.RewardClickListener{
@@ -59,6 +61,7 @@ public class RewardMainActivity extends AppCompatActivity implements RewardViewA
         rewardPoints = findViewById(R.id.textView_rewardPoint);
         rewardPoints.setText(String.valueOf(allowance));
 
+        // recyclerView setup
         rewardDBHelper = new RewardDBHelper(getApplicationContext());
         rewardItemList = rewardDBHelper.getRewardItem();
 
@@ -70,6 +73,7 @@ public class RewardMainActivity extends AppCompatActivity implements RewardViewA
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
+        // launcher for purchase history
         Button button_test = findViewById(R.id.button_purchase_history);
         button_test.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,8 +109,14 @@ public class RewardMainActivity extends AppCompatActivity implements RewardViewA
         bundle.putString(ITEM_NAME, rewardItem.getName());
         bundle.putInt(POINTS, rewardItem.getPoint());
         bundle.putInt(ALLOWANCE, allowance);
+        bundle.putString(REWARD_EFFECT_ITEM, rewardItem.getEffectItem());
 
-        Intent i = new Intent(this, RewardDetailActivity.class);
+        Intent i;
+        if(rewardItem.getEffectItem().compareTo("app") == 0){
+            i = new Intent(this, RewardDetailAppActivity.class);
+        }else{
+            i = new Intent(this, RewardDetailActivity.class);
+        }
         i.putExtras(bundle);
         startActivity(i);
     }
