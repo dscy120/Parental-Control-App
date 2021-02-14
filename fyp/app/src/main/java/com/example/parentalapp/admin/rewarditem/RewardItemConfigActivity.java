@@ -1,10 +1,12 @@
 package com.example.parentalapp.admin.rewarditem;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -117,8 +119,28 @@ public class RewardItemConfigActivity extends AppCompatActivity implements Rewar
     }
 
     @Override
-    public void onUnresolvedClick(int position) {
+    public void onUnresolvedClick(final int position) {
         // option to resolved the reward
+        final UnresolvedReward unresolvedReward = unresolvedRewardList.get(position);
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setTitle("Resolve Item")
+                .setMessage("Do you want to resolve this item")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // change reward status to resolved
+                        unresolvedRewardDBHelper.changeStatus(unresolvedReward.getId(), UnresolvedRewardDBHelper.UNRESOLVED_REWARD_STATUS_RESOVLED);
+                        unresolvedRewardList.remove(position);
+                        adapterUnresolveReward.notifyItemRemoved(position);
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // empty cancel button
+                    }
+                })
+                .show();
     }
 
     private void openDeleteDialog(RewardItem rewardItem){

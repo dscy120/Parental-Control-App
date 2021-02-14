@@ -26,7 +26,7 @@ public class UnresolvedRewardDBHelper extends DatabaseOpenHelper{
 
     public ArrayList<UnresolvedReward> getUnresolvedReward(){
         ArrayList<UnresolvedReward> unresolvedRewardList = new ArrayList<>();
-        String sql = "SELECT * FROM " + UNRESOLVED_REWARD_TABLE;
+        String sql = "SELECT * FROM " + UNRESOLVED_REWARD_TABLE + " WHERE " + UNRESOLVED_REWARD_STATUS + "=\'" + UNRESOLVED_REWARD_STATUS_UNRESOLVED + "\'";
         Cursor c = super.query(sql);
 
         if(c.moveToFirst()){
@@ -62,7 +62,7 @@ public class UnresolvedRewardDBHelper extends DatabaseOpenHelper{
         return super.updateSQL(UNRESOLVED_REWARD_TABLE, cv, id) > 0;
     }
 
-    public boolean deleteReward(int id){
+    public boolean deleteUnresolvedReward(int id){
         return super.deleteSQL(UNRESOLVED_REWARD_TABLE, UNRESOLVED_REWARD_ID, String.valueOf(id));
     }
 }
