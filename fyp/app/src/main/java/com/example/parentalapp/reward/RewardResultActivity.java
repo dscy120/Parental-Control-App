@@ -11,9 +11,15 @@ import android.widget.Toast;
 
 import com.example.parentalapp.R;
 import com.example.parentalapp.admin.apprestrict.AppRestrictConfig;
+import com.example.parentalapp.admin.rewarditem.unresolves.UnresolvedRewardDBHelper;
 import com.example.parentalapp.admin.rewardpoint.RewardPointConfig;
 import com.example.parentalapp.admin.screentime.TimeSettingHelper;
 import com.example.parentalapp.reward.rewardhistory.RewardHistoryDBHelper;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import static com.example.parentalapp.reward.RewardMainActivity.ITEM_NAME;
 import static com.example.parentalapp.reward.RewardMainActivity.POINTS;
@@ -26,6 +32,7 @@ import static com.example.parentalapp.reward.RewardDBHelper.REWARD_ITEM_ID;
 public class RewardResultActivity extends AppCompatActivity {
 
     private RewardDBHelper rewardDBHelper;
+    private UnresolvedRewardDBHelper unresolvedRewardDBHelper;
     private String itemName, effectItem, effectValue;
     private int id, quantity, point;
 
@@ -44,6 +51,7 @@ public class RewardResultActivity extends AppCompatActivity {
         });
 
         rewardDBHelper = new RewardDBHelper(getApplicationContext());
+        unresolvedRewardDBHelper = new UnresolvedRewardDBHelper(getApplicationContext());
 
         initialize();
 
@@ -72,13 +80,15 @@ public class RewardResultActivity extends AppCompatActivity {
                 timeSettingHelper.addRemainingScreenTime(Long.parseLong(effectValue) * quantity);
             }else if (effectItem.compareTo("app") == 0){
                 // app restriction reward
-                // TODO: allow user to choose app
                 AppRestrictConfig appRestrictConfig = new AppRestrictConfig(this);
                 appRestrictConfig.changePermission(itemName, true);
             }else if (effectItem.compareTo("custom") == 0){
                 // custom reward
                 // TODO: put reward into unresolved list
-
+                String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                if(!unresolvedRewardDBHelper.addUnresolvedReward(itemName, id, quantity, currentDate, UnresolvedRewardDBHelper.UNRESOLVED_REWARD_STATUS_UNRESOLVED)){
+                    Toast.makeText(getApplicationContext(), "Unable to puchase item.", Toast.LENGTH_SHORT).show();
+                }
             }
         }
         deductPoint();

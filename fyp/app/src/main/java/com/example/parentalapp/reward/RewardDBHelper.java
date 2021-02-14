@@ -24,7 +24,7 @@ public class RewardDBHelper extends DatabaseOpenHelper {
 
     public ArrayList<RewardItem> getRewardItem(){
         ArrayList<RewardItem> rewardItemList = new ArrayList<>();
-        String sql = "SELECT * FROM reward_item";
+        String sql = "SELECT * FROM " + REWARD_ITEM_TABLE;
         Cursor c = super.query(sql);
 
         if(c.moveToFirst()){

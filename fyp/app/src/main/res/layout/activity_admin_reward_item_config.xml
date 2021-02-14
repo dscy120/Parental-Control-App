@@ -43,6 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Reward Item List"
+            android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/recyclerView_reward_item_setting"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -67,7 +68,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Unresolved rewards"
-            app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerView_unresolved_reward"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -75,7 +77,7 @@
             app:layout_constraintVertical_bias="1.0" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/recyclerView_unresolved_reward"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="60dp"

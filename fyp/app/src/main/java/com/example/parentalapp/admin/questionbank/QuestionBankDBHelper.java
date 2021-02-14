@@ -99,25 +99,28 @@ public class QuestionBankDBHelper extends DatabaseOpenHelper {
 
             for(int i = 1; i < sheet.getRows(); i++){
                 Cell[] row = sheet.getRow(i);
-                String category = row[0].getContents();
-                String difficulty = row[1].getContents();
-                int questionType = Integer.parseInt(row[2].getContents());
-                String question = row[3].getContents();
-                String option1 = row[4].getContents();
-                String option2 = row[5].getContents();
-                String option3 = row[6].getContents();
-                String option4 = row[7].getContents();
-                String correctAns = row[8].getContents();
-                String explanation = row[9].getContents();
-                int sourceId = Integer.parseInt(row[10].getContents());
-                addQuestion(category, difficulty, questionType, question, option1, option2,
-                        option3, option4, correctAns, explanation, sourceId);
+                if (row != null){
+                    String category = row[0].getContents();
+                    String difficulty = row[1].getContents();
+                    int questionType = Integer.parseInt(row[2].getContents());
+                    String question = row[3].getContents();
+                    String option1 = row[4].getContents();
+                    String option2 = row[5].getContents();
+                    String option3 = row[6].getContents();
+                    String option4 = row[7].getContents();
+                    String correctAns = row[8].getContents();
+                    String explanation = row[9].getContents();
+                    int sourceId = Integer.parseInt(row[10].getContents());
+                    addQuestion(category, difficulty, questionType, question, option1, option2,
+                            option3, option4, correctAns, explanation, sourceId);
+                }
             }
-
 
         }catch (IOException e) {
             e.printStackTrace();
         }catch (BiffException e){
+            e.printStackTrace();
+        }catch (NumberFormatException e){
             e.printStackTrace();
         }
 
