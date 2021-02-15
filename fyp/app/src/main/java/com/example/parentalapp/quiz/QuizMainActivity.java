@@ -3,6 +3,8 @@ package com.example.parentalapp.quiz;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -16,6 +18,7 @@ import com.example.parentalapp.quiz.record.RecordMainActivity;
 public class QuizMainActivity extends AppCompatActivity {
 
     Button doQuiz, history;
+    private boolean back = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class QuizMainActivity extends AppCompatActivity {
         doQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                back = false;
                 chooseQuiz();
             }
         });
@@ -39,9 +43,31 @@ public class QuizMainActivity extends AppCompatActivity {
         history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                back = false;
                 startActivity(new Intent(getApplicationContext(), RecordMainActivity.class));
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        back = true;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // disable recent apps button
+        ActivityManager activityManager = (ActivityManager) getApplicationContext()
+                .getSystemService(Context.ACTIVITY_SERVICE);
+
+        activityManager.moveTaskToFront(getTaskId(), 0);
+        if(!back){
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        }else{
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        }
     }
 
     @Override

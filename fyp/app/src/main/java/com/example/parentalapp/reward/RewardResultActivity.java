@@ -2,6 +2,8 @@ package com.example.parentalapp.reward;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -103,5 +105,21 @@ public class RewardResultActivity extends AppCompatActivity {
     private void addToHistory(){
         RewardHistoryDBHelper rewardHistoryDBHelper = new RewardHistoryDBHelper(getApplicationContext());
         rewardHistoryDBHelper.addRecord(itemName, id);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // empty function
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // disable recent apps button
+        ActivityManager activityManager = (ActivityManager) getApplicationContext()
+                .getSystemService(Context.ACTIVITY_SERVICE);
+
+        activityManager.moveTaskToFront(getTaskId(), 0);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 }

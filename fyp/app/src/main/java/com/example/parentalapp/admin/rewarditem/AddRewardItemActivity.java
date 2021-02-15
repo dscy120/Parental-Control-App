@@ -3,6 +3,8 @@ package com.example.parentalapp.admin.rewarditem;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -61,6 +63,17 @@ public class AddRewardItemActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // disable recent apps button
+        ActivityManager activityManager = (ActivityManager) getApplicationContext()
+                .getSystemService(Context.ACTIVITY_SERVICE);
+
+        activityManager.moveTaskToFront(getTaskId(), 0);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     private boolean addItem(){

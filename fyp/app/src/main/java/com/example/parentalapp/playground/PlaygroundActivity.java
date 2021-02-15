@@ -7,6 +7,7 @@ import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +25,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.parentalapp.MainActivity;
 import com.example.parentalapp.R;
 
 import java.util.ArrayList;
@@ -53,6 +55,12 @@ public class PlaygroundActivity extends AppCompatActivity implements PlaygroundV
     @Override
     protected void onPause() {
         super.onPause();
+        // disable recent apps button
+        ActivityManager activityManager = (ActivityManager) getApplicationContext()
+                .getSystemService(Context.ACTIVITY_SERVICE);
+
+        activityManager.moveTaskToFront(getTaskId(), 0);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     @Override
@@ -60,10 +68,13 @@ public class PlaygroundActivity extends AppCompatActivity implements PlaygroundV
         super.onStop();
     }
 
+    // disable back button
     @Override
     public void onBackPressed() {
-        // Back button disabled
+        // empty function
     }
+
+    // disable recent apps button
 
     public void availableApps(Context context){
         Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);

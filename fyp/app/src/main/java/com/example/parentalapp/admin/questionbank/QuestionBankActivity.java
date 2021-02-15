@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -34,6 +36,7 @@ public class QuestionBankActivity extends AppCompatActivity implements QuestionB
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<QuestionBankSource> sourceList;
     private QuestionBankDBHelper questionBankDBHelper;
+    private boolean back = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,11 +71,32 @@ public class QuestionBankActivity extends AppCompatActivity implements QuestionB
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                back = true;
                 startActivity(new Intent(getApplicationContext(), ParentMainActivity.class));
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        back = true;
+        startActivity(new Intent(getApplicationContext(), ParentMainActivity.class));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // disable recent apps button
+        ActivityManager activityManager = (ActivityManager) getApplicationContext()
+                .getSystemService(Context.ACTIVITY_SERVICE);
+
+        activityManager.moveTaskToFront(getTaskId(), 0);
+        if(!back){
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        }else{
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         }
     }
 

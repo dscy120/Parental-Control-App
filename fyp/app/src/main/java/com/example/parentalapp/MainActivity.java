@@ -8,10 +8,13 @@ import androidx.preference.PreferenceManager;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private TimeSettingHelper timeSettingHelper;
     private Button adminLogin, quiz, rewardStore;
+    private boolean back = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,13 +52,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
     protected void onPause() {
         super.onPause();
+        // disable recent apps button
+        ActivityManager activityManager = (ActivityManager) getApplicationContext()
+                .getSystemService(Context.ACTIVITY_SERVICE);
+
+        activityManager.moveTaskToFront(getTaskId(), 0);
+        if(!back){
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        }else{
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        }
     }
 
     @Override
@@ -62,9 +71,10 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
     }
 
+    // disable back button
     @Override
     public void onBackPressed() {
-        // Back button is disabled
+        // empty function
     }
 
     // Reserved if need option menu
@@ -131,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
                 ContextCompat.startForegroundService(this, serviceIntent);
                 Intent playGroundIntent = new Intent (getApplicationContext(), PlaygroundActivity.class);
                 startActivity(playGroundIntent);
+                onPause();
             }
         }
 

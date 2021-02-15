@@ -6,6 +6,8 @@ import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -35,6 +37,7 @@ public class RewardMainActivity extends AppCompatActivity implements RewardViewA
     private ArrayList<RewardItem> rewardItemList;
     private RewardDBHelper rewardDBHelper;
     private int allowance;
+    private boolean back = false;
 
     public static final String ITEM_NAME = "item_name";
     public static final String POINTS = "points";
@@ -88,11 +91,32 @@ public class RewardMainActivity extends AppCompatActivity implements RewardViewA
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                back = true;
                 startActivity(new Intent(this, MainActivity.class));
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        back = true;
+        startActivity(new Intent(this, MainActivity.class));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // disable recent apps button
+        ActivityManager activityManager = (ActivityManager) getApplicationContext()
+                .getSystemService(Context.ACTIVITY_SERVICE);
+
+        activityManager.moveTaskToFront(getTaskId(), 0);
+        if(!back){
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        }else{
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         }
     }
 

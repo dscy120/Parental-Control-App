@@ -56,12 +56,12 @@ public class ScreenTimeService extends Service {
     public void onDestroy() {
         timer.cancel();
         timeSettingHelper.setRemainingScreenTime(remainingTime / 1000);
-        super.onDestroy();
         // jump back to main page
         Intent mainActivity = new Intent(getApplicationContext(), MainActivity.class);
         mainActivity.addCategory(Intent.CATEGORY_LAUNCHER);
         mainActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(mainActivity);
+        super.onDestroy();
     }
 
     @Nullable

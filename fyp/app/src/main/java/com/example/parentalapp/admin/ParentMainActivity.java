@@ -1,5 +1,7 @@
 package com.example.parentalapp.admin;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -20,6 +22,7 @@ import com.example.parentalapp.admin.screentime.GeneralSettingsActivity;
 public class ParentMainActivity extends AppCompatActivity {
 
     Button timeSettings, appSelect, setRewardPoint, questionSetting, rewardItemSetting;
+    private boolean back = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,11 +80,32 @@ public class ParentMainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                back = true;
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        back = true;
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // disable recent apps button
+        ActivityManager activityManager = (ActivityManager) getApplicationContext()
+                .getSystemService(Context.ACTIVITY_SERVICE);
+
+        activityManager.moveTaskToFront(getTaskId(), 0);
+        if(!back){
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        }else{
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         }
     }
 }
