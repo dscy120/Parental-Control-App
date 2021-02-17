@@ -2,11 +2,15 @@ package com.example.parentalapp.admin.rewarditem.unresolves;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 
 import com.example.parentalapp.database.DatabaseOpenHelper;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class UnresolvedRewardDBHelper extends DatabaseOpenHelper{
 
@@ -46,12 +50,13 @@ public class UnresolvedRewardDBHelper extends DatabaseOpenHelper{
         return unresolvedRewardList;
     }
 
-    public boolean addUnresolvedReward(String rewardName, int rewardID, int quantity, String date, String status){
+    public boolean addUnresolvedReward(String rewardName, int rewardID, int quantity, String status){
         ContentValues cv = new ContentValues();
         cv.put(UNRESOLVED_REWARD_NAME, rewardName);
         cv.put(UNRESOLVED_REWARD_ITEM_ID, rewardID);
         cv.put(UNRESOLVED_REWARD_QUANTITY, quantity);
-        cv.put(UNRESOLVED_REWARD_DATE, date);
+        String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+        cv.put(UNRESOLVED_REWARD_DATE, currentDate);
         cv.put(UNRESOLVED_REWARD_STATUS, status);
         return super.insertSQL(UNRESOLVED_REWARD_TABLE, cv);
     }

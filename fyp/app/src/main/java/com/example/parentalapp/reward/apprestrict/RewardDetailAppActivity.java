@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.parentalapp.R;
 import com.example.parentalapp.admin.ParentMainActivity;
+import com.example.parentalapp.admin.apprestrict.AppRestrictConfig;
 import com.example.parentalapp.playground.PlaygroundViewAdapter;
 import com.example.parentalapp.reward.RewardConfirmDialog;
 import com.example.parentalapp.reward.RewardMainActivity;
@@ -36,7 +37,7 @@ import static com.example.parentalapp.reward.RewardMainActivity.QUANTITY;
 
 public class RewardDetailAppActivity extends AppCompatActivity implements PlaygroundViewAdapter.PlaygroundClickListener, RewardConfirmDialog.RewardConfirmDialogListener {
 
-    private SharedPreferences sharedPreferences;
+    private AppRestrictConfig appRestrictConfig;
     private PackageManager pm;
     private ArrayList<ResolveInfo> newList;
     private RecyclerView recyclerView;
@@ -57,15 +58,12 @@ public class RewardDetailAppActivity extends AppCompatActivity implements Playgr
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        sharedPreferences = getSharedPreferences("appPreference", MODE_PRIVATE);
-
+        pm = getPackageManager();
         initialize();
 
         // get the list of applications
-        Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
-        mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-        pm = this.getPackageManager();
-        newList = new ArrayList<ResolveInfo>(pm.queryIntentActivities( mainIntent, 0));
+        appRestrictConfig = new AppRestrictConfig(this);
+        newList = appRestrictConfig.getApplicationList(false);
 
         setRecyclerView();
     }

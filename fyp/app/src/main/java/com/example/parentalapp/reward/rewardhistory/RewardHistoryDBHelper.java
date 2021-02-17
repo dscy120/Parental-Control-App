@@ -48,8 +48,7 @@ public class RewardHistoryDBHelper extends DatabaseOpenHelper {
         ContentValues cv = new ContentValues();
         cv.put(REWARD_RECORD_ITEM_NAME, itemName);
         cv.put(REWARD_RECORD_ITEM_ID, itemId);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault());
-        String currentDate = simpleDateFormat.format(new Date());
+        String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
         cv.put(REWARD_RECORD_DATE, currentDate);
 
         return super.insertSQL(REWARD_RECORD_TABLE, cv);

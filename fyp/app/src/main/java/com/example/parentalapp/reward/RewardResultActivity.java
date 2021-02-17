@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.parentalapp.R;
@@ -33,16 +35,21 @@ import static com.example.parentalapp.reward.RewardDBHelper.REWARD_ITEM_ID;
 
 public class RewardResultActivity extends AppCompatActivity {
 
+    private TextView textViewResult;
+    private boolean success = false;
     private RewardDBHelper rewardDBHelper;
     private UnresolvedRewardDBHelper unresolvedRewardDBHelper;
-    private String itemName, effectItem, effectValue;
+    private String itemName, effectItem, effectValue, currentDate;
     private int id, quantity, point;
+    private SharedPreferences sharedPreferences;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reward_result);
+
+        sharedPreferences = getSharedPreferences("appPreference", MODE_PRIVATE);
 
         Button button_return = findViewById(R.id.button_back_to_store);
         button_return.setOnClickListener(new View.OnClickListener() {
@@ -51,6 +58,8 @@ public class RewardResultActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), RewardMainActivity.class));
             }
         });
+
+        textViewResult = findViewById(R.id.textView_reward_result);
 
         rewardDBHelper = new RewardDBHelper(getApplicationContext());
         unresolvedRewardDBHelper = new UnresolvedRewardDBHelper(getApplicationContext());
@@ -80,21 +89,25 @@ public class RewardResultActivity extends AppCompatActivity {
                 effectValue = c.getString(c.getColumnIndex(REWARD_EFFECT_VALUE));
                 TimeSettingHelper timeSettingHelper = new TimeSettingHelper(getApplicationContext());
                 timeSettingHelper.addRemainingScreenTime(Long.parseLong(effectValue) * quantity);
+                success = true;
             }else if (effectItem.compareTo("app") == 0){
                 // app restriction reward
-                AppRestrictConfig appRestrictConfig = new AppRestrictConfig(this);
-                appRestrictConfig.changePermission(itemName, true);
+                if(!sharedPreferences.getBoolean(itemName, false)){
+                    AppRestrictConfig appRestrictConfig = new AppRestrictConfig(this);
+                    appRestrictConfig.changePermission(itemName, true);
+                    success = true;
+                }
+
             }else if (effectItem.compareTo("custom") == 0){
                 // custom reward
-                // TODO: put reward into unresolved list
-                String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-                if(!unresolvedRewardDBHelper.addUnresolvedReward(itemName, id, quantity, currentDate, UnresolvedRewardDBHelper.UNRESOLVED_REWARD_STATUS_UNRESOLVED)){
+                success = true;
+                if(!unresolvedRewardDBHelper.addUnresolvedReward(itemName, id, quantity, UnresolvedRewardDBHelper.UNRESOLVED_REWARD_STATUS_UNRESOLVED)){
                     Toast.makeText(getApplicationContext(), "Unable to puchase item.", Toast.LENGTH_SHORT).show();
+                    success = false;
                 }
             }
         }
-        deductPoint();
-        addToHistory();
+        showResult();
     }
 
     private void deductPoint(){
@@ -105,6 +118,16 @@ public class RewardResultActivity extends AppCompatActivity {
     private void addToHistory(){
         RewardHistoryDBHelper rewardHistoryDBHelper = new RewardHistoryDBHelper(getApplicationContext());
         rewardHistoryDBHelper.addRecord(itemName, id);
+    }
+
+    private void showResult(){
+        if(success){
+            deductPoint();
+            addToHistory();
+            textViewResult.setText("Reward Claimed!");
+        }else{
+            textViewResult.setText("Purchase failed.");
+        }
     }
 
     @Override

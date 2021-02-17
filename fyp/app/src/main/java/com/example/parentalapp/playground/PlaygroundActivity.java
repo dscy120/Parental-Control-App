@@ -27,6 +27,7 @@ import android.widget.TextView;
 
 import com.example.parentalapp.MainActivity;
 import com.example.parentalapp.R;
+import com.example.parentalapp.admin.apprestrict.AppRestrictConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,13 +38,15 @@ public class PlaygroundActivity extends AppCompatActivity implements PlaygroundV
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
+    private AppRestrictConfig appRestrictConfig;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playground);
         sharedPreferences = getSharedPreferences("appPreference", MODE_PRIVATE);
-        availableApps(this);
+        appRestrictConfig = new AppRestrictConfig(this);
+        availableApps();
         setAppList(this);
     }
 
@@ -76,22 +79,8 @@ public class PlaygroundActivity extends AppCompatActivity implements PlaygroundV
 
     // disable recent apps button
 
-    public void availableApps(Context context){
-        Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
-        mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-        // List of all installed apps
-        PackageManager pm = context.getPackageManager();
-        List<ResolveInfo> pkgAppsList = pm.queryIntentActivities( mainIntent, 0);
-        newList = new ArrayList<>();
-
-        // Check for allowed apps
-        for(ResolveInfo r : pkgAppsList){
-            ActivityInfo a = r.activityInfo;
-            String appname = pm.getApplicationLabel(a.applicationInfo).toString();
-            if (sharedPreferences.getBoolean(appname, false)){
-                newList.add(r);
-            }
-        }
+    public void availableApps(){
+        newList = appRestrictConfig.getApplicationList(true);
     }
 
     public void setAppList(Context context){
