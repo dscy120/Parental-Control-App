@@ -39,6 +39,7 @@ public class PlaygroundActivity extends AppCompatActivity implements PlaygroundV
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private AppRestrictConfig appRestrictConfig;
+    private boolean applaunch = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +60,19 @@ public class PlaygroundActivity extends AppCompatActivity implements PlaygroundV
     protected void onPause() {
         super.onPause();
         // disable recent apps button
-        ActivityManager activityManager = (ActivityManager) getApplicationContext()
-                .getSystemService(Context.ACTIVITY_SERVICE);
+        if(!applaunch){
+            ActivityManager activityManager = (ActivityManager) getApplicationContext()
+                    .getSystemService(Context.ACTIVITY_SERVICE);
 
-        activityManager.moveTaskToFront(getTaskId(), 0);
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            activityManager.moveTaskToFront(getTaskId(), 0);
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        applaunch = false;
     }
 
     @Override
@@ -95,6 +104,8 @@ public class PlaygroundActivity extends AppCompatActivity implements PlaygroundV
 
     @Override
     public void onAppClick(int position) {
+        applaunch = true;
+
         ResolveInfo resolveInfo = newList.get(position);
         ComponentName name = new ComponentName(resolveInfo.activityInfo.applicationInfo.packageName, resolveInfo.activityInfo.name);
         Intent i = new Intent(Intent.ACTION_MAIN);

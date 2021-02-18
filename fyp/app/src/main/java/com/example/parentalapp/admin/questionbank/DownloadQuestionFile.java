@@ -28,6 +28,7 @@ public class DownloadQuestionFile extends AsyncTask<String, String, String> {
     private Context context;
     private TaskDelegate delegate;
     private String parentFilePath = "/sdcard/";
+    private boolean downloadSuccess = false;
 
     public DownloadQuestionFile(Context context, TaskDelegate delegate){
         this.context = context;
@@ -72,6 +73,8 @@ public class DownloadQuestionFile extends AsyncTask<String, String, String> {
 
                     outputStream.write(data, 0, count);
                 }
+                downloadSuccess = true;
+
             }catch (Exception e){
                 e.printStackTrace();
             }finally {
@@ -93,9 +96,13 @@ public class DownloadQuestionFile extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPostExecute(String s) {
-        int sourceId = questionBankDBHelper.insertQuestion(s);
-        Toast.makeText(context, "Download Completed", Toast.LENGTH_SHORT).show();
-        delegate.taskCompleteNotify(String.valueOf(sourceId));
+        if(downloadSuccess){
+            int sourceId = questionBankDBHelper.insertQuestion(s);
+            Toast.makeText(context, "Downlaod completed.", Toast.LENGTH_SHORT).show();
+            delegate.taskCompleteNotify(String.valueOf(sourceId));
+        }else{
+            Toast.makeText(context, "Downlaod failed.", Toast.LENGTH_SHORT).show();
+        }
         //questionBankDBHelper.insertQuestion("/sdcard/Download/question.xls");
     }
 

@@ -43,7 +43,7 @@ public class AppRestrictConfig {
         mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
         PackageManager pm = context.getPackageManager();
         List<ResolveInfo> pkgAppsList = pm.queryIntentActivities( mainIntent, 0);
-        ArrayList<ResolveInfo>newList = new ArrayList<>();
+        ArrayList<ResolveInfo> newList = new ArrayList<>();
 
         // Check for allowed apps
         for(ResolveInfo r : pkgAppsList){
