@@ -21,7 +21,7 @@
 
     <TextView
         android:id="@+id/textView_reward_history_itemName"
-        android:layout_width="233dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Item Name"
         android:textSize="24sp"
