@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ScrollView;
 
 
 import com.example.parentalapp.admin.PinActivity;
@@ -33,6 +34,7 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity {
 
     public static final String ACTIVE_TIME_SERVICE = "active_time_service";
+    public static final String EXIT = "exit";
 
     private SharedPreferences sharedPreferences;
     private TimeSettingHelper timeSettingHelper;
@@ -56,7 +58,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if(sharedPreferences.getBoolean(ACTIVE_TIME_SERVICE, false)){
+        if(getIntent().getBooleanExtra(EXIT, false)){
+            finish();
+            System.exit(0);
+        }else if(sharedPreferences.getBoolean(ACTIVE_TIME_SERVICE, false)){
             startActivity(new Intent (getApplicationContext(), PlaygroundActivity.class));
         }
     }

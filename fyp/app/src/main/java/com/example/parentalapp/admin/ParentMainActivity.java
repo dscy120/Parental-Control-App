@@ -19,6 +19,10 @@ import com.example.parentalapp.admin.rewarditem.RewardItemConfigActivity;
 import com.example.parentalapp.admin.rewardpoint.RewardPointControlActivity;
 import com.example.parentalapp.admin.screentime.GeneralSettingsActivity;
 
+import org.apache.log4j.chainsaw.Main;
+
+import static com.example.parentalapp.MainActivity.EXIT;
+
 public class ParentMainActivity extends AppCompatActivity {
 
     Button timeSettings, appSelect, setRewardPoint, questionSetting, rewardItemSetting;
@@ -107,5 +111,13 @@ public class ParentMainActivity extends AppCompatActivity {
         }else{
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         }
+    }
+
+    public void QuitApp(View view){
+        getPackageManager().clearPackagePreferredActivities(getPackageName());
+        Intent i = new Intent(this, MainActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        i.putExtra(EXIT, true);
+        startActivity(i);
     }
 }
