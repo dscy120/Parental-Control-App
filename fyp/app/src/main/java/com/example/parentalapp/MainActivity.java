@@ -32,6 +32,8 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String ACTIVE_TIME_SERVICE = "active_time_service";
+
     private SharedPreferences sharedPreferences;
     private TimeSettingHelper timeSettingHelper;
     private Button adminLogin, quiz, rewardStore;
@@ -52,6 +54,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        if(sharedPreferences.getBoolean(ACTIVE_TIME_SERVICE, false)){
+            startActivity(new Intent (getApplicationContext(), PlaygroundActivity.class));
+        }
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
         // disable recent apps button
@@ -63,6 +73,14 @@ public class MainActivity extends AppCompatActivity {
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }else{
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(sharedPreferences.getBoolean(ACTIVE_TIME_SERVICE, false)){
+            startActivity(new Intent (getApplicationContext(), PlaygroundActivity.class));
         }
     }
 
@@ -137,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
             if(!checkActiveHour()){
                 showAlertDialog("Warning", "Not within active hour!");
             }else{
+                sharedPreferences.edit().putBoolean(ACTIVE_TIME_SERVICE, true).apply();
                 Intent serviceIntent = new Intent(this, ScreenTimeService.class);
                 ContextCompat.startForegroundService(this, serviceIntent);
                 Intent playGroundIntent = new Intent (getApplicationContext(), PlaygroundActivity.class);

@@ -4,6 +4,7 @@ package com.example.parentalapp.playground;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,6 +33,8 @@ import com.example.parentalapp.admin.apprestrict.AppRestrictConfig;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.parentalapp.MainActivity.ACTIVE_TIME_SERVICE;
+
 public class PlaygroundActivity extends AppCompatActivity implements PlaygroundViewAdapter.PlaygroundClickListener {
     private SharedPreferences sharedPreferences;
     private ArrayList<ResolveInfo> newList;
@@ -45,7 +48,7 @@ public class PlaygroundActivity extends AppCompatActivity implements PlaygroundV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playground);
-        sharedPreferences = getSharedPreferences("appPreference", MODE_PRIVATE);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         appRestrictConfig = new AppRestrictConfig(this);
         availableApps();
         setAppList(this);
@@ -117,6 +120,7 @@ public class PlaygroundActivity extends AppCompatActivity implements PlaygroundV
     }
 
     public void stopTimerService(View v){
+        sharedPreferences.edit().putBoolean(ACTIVE_TIME_SERVICE, false).apply();
         stopService(new Intent(PlaygroundActivity.this, ScreenTimeService.class));
     }
 }
