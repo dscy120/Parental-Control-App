@@ -7,6 +7,7 @@ import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -96,11 +97,10 @@ public class QuestionBankDetailActivity extends AppCompatActivity implements Dow
         buttonDownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                showDownloadDialog();
                 //questionBankDBHelper.downloadQuestion(getIntent().getExtras().getString(SOURCE_DOWNLAOD_LINK));\
                 new DownloadQuestionFile(getApplicationContext(), taskDelegate).execute(q.getDownloadLink(), String.valueOf(q.getId()));
                 Toast.makeText(getApplicationContext(), "Download started", Toast.LENGTH_SHORT).show();
-                showDownloadDialog();
             }
         });
 
@@ -145,7 +145,21 @@ public class QuestionBankDetailActivity extends AppCompatActivity implements Dow
 
     @Override
     public void taskCompleteNotify(String result) {
-        updateText();
         dialog.dismiss();
+        if(Integer.parseInt(result) >= 0){
+            updateText();
+        }else{
+            dialog = new AlertDialog.Builder(this)
+                    .setTitle("Download failed.")
+                    .setMessage("Please check your network connection.")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .show();
+        }
+
     }
 }

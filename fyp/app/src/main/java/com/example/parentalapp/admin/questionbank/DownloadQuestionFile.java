@@ -96,13 +96,15 @@ public class DownloadQuestionFile extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPostExecute(String s) {
+        int sourceId;
         if(downloadSuccess){
-            int sourceId = questionBankDBHelper.insertQuestion(s);
+            sourceId = questionBankDBHelper.insertQuestion(s);
             Toast.makeText(context, "Downlaod completed.", Toast.LENGTH_SHORT).show();
-            delegate.taskCompleteNotify(String.valueOf(sourceId));
         }else{
+            sourceId = -1;
             Toast.makeText(context, "Downlaod failed.", Toast.LENGTH_SHORT).show();
         }
+        delegate.taskCompleteNotify(String.valueOf(sourceId));
         //questionBankDBHelper.insertQuestion("/sdcard/Download/question.xls");
     }
 
