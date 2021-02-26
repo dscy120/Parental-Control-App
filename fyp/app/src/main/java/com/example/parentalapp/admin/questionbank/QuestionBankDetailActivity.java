@@ -4,6 +4,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ActivityManager;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +18,8 @@ import android.widget.Toast;
 import com.example.parentalapp.MainActivity;
 import com.example.parentalapp.R;
 
+import java.io.File;
+
 import static com.example.parentalapp.admin.questionbank.QuestionBankDBHelper.SOURCE_ID;
 import static com.example.parentalapp.admin.questionbank.QuestionBankDBHelper.SOURCE_TITLE;
 import static com.example.parentalapp.admin.questionbank.QuestionBankDBHelper.SOURCE_SUBJECT;
@@ -26,11 +30,13 @@ import static com.example.parentalapp.admin.questionbank.QuestionBankDBHelper.SO
 
 public class QuestionBankDetailActivity extends AppCompatActivity implements DownloadQuestionFile.TaskDelegate {
 
-    TextView title, subject, level, publisher, status;
-    Button buttonDownload;
-    QuestionBankDBHelper questionBankDBHelper;
-    QuestionBankSource q;
-    DownloadQuestionFile.TaskDelegate taskDelegate = this;
+    private TextView title, subject, level, publisher, status;
+    private Button buttonDownload, buttonDelete;
+    private QuestionBankDBHelper questionBankDBHelper;
+    private QuestionBankSource q;
+    private DownloadQuestionFile.TaskDelegate taskDelegate = this;
+    private int sourceId;
+    private Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,12 +100,27 @@ public class QuestionBankDetailActivity extends AppCompatActivity implements Dow
                 //questionBankDBHelper.downloadQuestion(getIntent().getExtras().getString(SOURCE_DOWNLAOD_LINK));\
                 new DownloadQuestionFile(getApplicationContext(), taskDelegate).execute(q.getDownloadLink(), String.valueOf(q.getId()));
                 Toast.makeText(getApplicationContext(), "Download started", Toast.LENGTH_SHORT).show();
+                showDownloadDialog();
+            }
+        });
+
+        // button to delete the question bank source
+        buttonDelete = findViewById(R.id.button_delete_source);
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(questionBankDBHelper.removeQuestions(sourceId)){
+                    questionBankDBHelper.updateStatus(sourceId, 0);
+                    Toast.makeText(getApplicationContext(), "Question source has been removed", Toast.LENGTH_SHORT).show();
+                }
+                updateText();
             }
         });
     }
 
     private void updateText(){
-        q = questionBankDBHelper.getSourceDetail(getIntent().getExtras().getInt(SOURCE_ID));
+        sourceId = getIntent().getExtras().getInt(SOURCE_ID);
+        q = questionBankDBHelper.getSourceDetail(sourceId);
         title.setText("Title: " + q.getTitle());
         subject.setText("Subject: " + q.getSubject());
         level.setText("Level: " + q.getLevel());
@@ -108,11 +129,23 @@ public class QuestionBankDetailActivity extends AppCompatActivity implements Dow
         if(q.getDownloadStatus() == 1){
             status.setText("Exercise Downloaded");
             buttonDownload.setEnabled(false);
+            buttonDelete.setEnabled(true);
+        }else{
+            buttonDownload.setEnabled(true);
+            buttonDelete.setEnabled(false);
         }
+    }
+
+    private void showDownloadDialog(){
+        dialog = new AlertDialog.Builder(this)
+                .setTitle("Downloading")
+                .setMessage("Please wait for a moment")
+                .show();
     }
 
     @Override
     public void taskCompleteNotify(String result) {
         updateText();
+        dialog.dismiss();
     }
 }

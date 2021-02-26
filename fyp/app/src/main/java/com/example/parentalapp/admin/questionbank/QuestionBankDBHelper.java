@@ -124,8 +124,17 @@ public class QuestionBankDBHelper extends DatabaseOpenHelper {
             e.printStackTrace();
         }
 
+        // remove xls file
+        if(!inputFile.delete()){
+            Toast.makeText(context, "Error deleting xls file", Toast.LENGTH_SHORT).show();
+        }
+
         return source;
 
+    }
+
+    public boolean removeQuestions(int sourceId){
+        return deleteSQL(QuizConstant.QuestionTable.TABLE_NAME, QuizConstant.QuestionTable.COLUMN_SOURCE_ID, String.valueOf(sourceId));
     }
 
     public void addQuestion(String questionCategory, String difficulty, int questionType, String question,
