@@ -33,6 +33,7 @@
         android:id="@+id/button_appSelect"
         android:layout_width="329dp"
         android:layout_height="81dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/card_green"
         android:drawableLeft="@drawable/apps_24px"
         android:paddingLeft="30dip"
@@ -43,7 +44,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_timeSettings"
-        app:layout_constraintVertical_bias="0.061" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView3"
@@ -61,6 +62,7 @@
         android:id="@+id/button_set_reward_point"
         android:layout_width="329dp"
         android:layout_height="81dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/card_green_4"
         android:drawableLeft="@drawable/school_24px"
         android:paddingLeft="30dip"
@@ -71,7 +73,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_appSelect"
-        app:layout_constraintVertical_bias="0.075" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/button_question_setting"
@@ -94,6 +96,7 @@
         android:id="@+id/button_reward_item_setting"
         android:layout_width="329dp"
         android:layout_height="81dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/card_green_4"
         android:drawableLeft="@drawable/card_giftcard_24px"
         android:paddingLeft="30dip"
@@ -104,7 +107,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_set_reward_point"
-        app:layout_constraintVertical_bias="0.127" />
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/button_change_password"
+        android:layout_width="329dp"
+        android:layout_height="81dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/card_green_3"
+        android:drawableLeft="@drawable/vpn_key_24px"
+        android:paddingLeft="30dip"
+        android:paddingRight="26dip"
+        android:text="Change Password"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_question_setting"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/button_exit_app"
@@ -120,7 +140,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_question_setting"
+        app:layout_constraintTop_toBottomOf="@+id/button_change_password"
         app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 

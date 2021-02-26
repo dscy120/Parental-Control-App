@@ -6,8 +6,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <uses-permission android:name="android.permission.REORDER_TASKS"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.REORDER_TASKS" />
 
     <application
         android:name=".playground.ScreenTimeApp"
@@ -18,7 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".reward.apprestrict.RewardDetailAppActivity"></activity>
+        <activity android:name=".admin.ChangePasswordActivity"></activity>
+        <activity android:name=".reward.apprestrict.RewardDetailAppActivity" />
         <activity android:name=".reward.rewardhistory.RewardHistoryActivity" />
         <activity android:name=".admin.rewarditem.AddRewardItemActivity" />
         <activity android:name=".admin.rewarditem.RewardItemConfigActivity" />

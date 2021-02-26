@@ -25,7 +25,7 @@ import static com.example.parentalapp.MainActivity.EXIT;
 
 public class ParentMainActivity extends AppCompatActivity {
 
-    Button timeSettings, appSelect, setRewardPoint, questionSetting, rewardItemSetting;
+    Button timeSettings, appSelect, setRewardPoint, questionSetting, rewardItemSetting, changePassword;
     private boolean back = false;
 
     @Override
@@ -76,6 +76,14 @@ public class ParentMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), RewardItemConfigActivity.class));
+            }
+        });
+
+        changePassword = findViewById(R.id.button_change_password);
+        changePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), ChangePasswordActivity.class));
             }
         });
     }

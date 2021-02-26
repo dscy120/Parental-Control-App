@@ -35,6 +35,7 @@ public class RewardItemConfigActivity extends AppCompatActivity implements Rewar
     private ArrayList<RewardItem> rewardItemList;
     private RewardDBHelper rewardDBHelper;
     private Button addItem;
+    private boolean back = false;
 
     private RecyclerView recyclerViewUnresolveReward;
     private RecyclerView.Adapter adapterUnresolveReward;
@@ -58,15 +59,27 @@ public class RewardItemConfigActivity extends AppCompatActivity implements Rewar
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        back = false;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 startActivity(new Intent(getApplicationContext(), ParentMainActivity.class));
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                back = true;
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        back = true;
+        startActivity(new Intent(getApplicationContext(), ParentMainActivity.class));
     }
 
     @Override
@@ -77,7 +90,11 @@ public class RewardItemConfigActivity extends AppCompatActivity implements Rewar
                 .getSystemService(Context.ACTIVITY_SERVICE);
 
         activityManager.moveTaskToFront(getTaskId(), 0);
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        if(!back){
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        }else{
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        }
     }
 
     private void setRecyclerViewRewardItem(){

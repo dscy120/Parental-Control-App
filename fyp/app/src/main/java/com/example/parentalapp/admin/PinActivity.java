@@ -3,7 +3,9 @@ package com.example.parentalapp.admin;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -12,11 +14,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import com.example.parentalapp.MainActivity;
 import com.example.parentalapp.R;
 
 public class PinActivity extends AppCompatActivity {
+    public static final String PASSWORD = "password";
+
+    private SharedPreferences sharedPreferences;
     private EditText editText_pin;
     private Button button_confirm;
     private boolean back = false;
@@ -26,17 +32,21 @@ public class PinActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pin);
 
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        final String password = sharedPreferences.getString(PASSWORD, "1234");
+
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
         editText_pin = (EditText)findViewById(R.id.editTextNumber);
+
         button_confirm = (Button)findViewById(R.id.button_confirm);
         button_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (editText_pin.getText().toString().equals("1234")){
+                if (editText_pin.getText().toString().equals(password)){
                     Intent i = new Intent();
                     startActivity(new Intent(getApplicationContext(), ParentMainActivity.class));
                 }else{
