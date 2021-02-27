@@ -7,18 +7,24 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.os.IBinder;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
+import androidx.preference.PreferenceManager;
 
 import com.example.parentalapp.MainActivity;
 import com.example.parentalapp.R;
 import com.example.parentalapp.admin.screentime.TimeSettingHelper;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
+import static com.example.parentalapp.MainActivity.ACTIVE_TIME_SERVICE;
 import static com.example.parentalapp.playground.ScreenTimeApp.CHANNEL_ID;
 
 public class ScreenTimeService extends Service {
@@ -26,6 +32,7 @@ public class ScreenTimeService extends Service {
     public static final int NOTIFICATION_CHANNEL = 101;
     private TimeSettingHelper timeSettingHelper;
     private ScreenTimer timer;
+    private SharedPreferences sharedPreferences;
 
     private long remainingTime;
 
@@ -33,6 +40,7 @@ public class ScreenTimeService extends Service {
     public void onCreate() {
         super.onCreate();
         timeSettingHelper = new TimeSettingHelper(getBaseContext());
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
     }
 
     @Override
@@ -56,11 +64,13 @@ public class ScreenTimeService extends Service {
     public void onDestroy() {
         timer.cancel();
         timeSettingHelper.setRemainingScreenTime(remainingTime / 1000);
+        sharedPreferences.edit().putBoolean(ACTIVE_TIME_SERVICE, false).apply();
         // jump back to main page
         Intent mainActivity = new Intent(getApplicationContext(), MainActivity.class);
         mainActivity.addCategory(Intent.CATEGORY_LAUNCHER);
         mainActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(mainActivity);
+        Toast.makeText(getBaseContext(), "Screen time stopped", Toast.LENGTH_SHORT).show();
         super.onDestroy();
     }
 
@@ -107,10 +117,37 @@ public class ScreenTimeService extends Service {
             //Track remaining time on notification
             updateNotification(hms);
 
+            if(!checkActiveHour()){
+                stopSelf();
+            }
+
             // Show time on main activity
             // EventBus post
             //EventBus.getDefault().post(new MessageEvent(hms));
 
+        }
+
+        // check current time against the active hour set by admin
+        private boolean checkActiveHour(){
+            SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+            String[] currentTime = format.format(Calendar.getInstance().getTime()).split(":");
+
+            int currentHour = Integer.parseInt(currentTime[0]);
+            int currentMinute = Integer.parseInt(currentTime[1]);
+
+            int hourStart = timeSettingHelper.getActiveHourStart();
+            int hourEnd = timeSettingHelper.getActiveHourEnd();
+            int minuteStart = timeSettingHelper.getActiveMinuteStart();
+            int minuteEnd = timeSettingHelper.getActiveMinuteEnd();
+
+            if(currentHour - hourStart < hourEnd - hourStart){
+                return true;
+            }else if(currentHour == hourStart && currentMinute > minuteStart){
+                return true;
+            }else if(currentHour == hourEnd && currentMinute < minuteEnd){
+                return true;
+            }
+            return false;
         }
 
         @Override
