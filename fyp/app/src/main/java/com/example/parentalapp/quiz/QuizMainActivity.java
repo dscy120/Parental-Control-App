@@ -25,8 +25,6 @@ import java.util.Locale;
 public class QuizMainActivity extends AppCompatActivity {
 
     public static final String QUIZ_ATTEMPT_ALLOWED = "attempt_allowed";
-    public static final String SAVED_DATE = "saved_date";
-    public static final int quizAttemptAllowed = 5;
 
     SharedPreferences sharedPreferences;
     Button doQuiz, history;
@@ -61,23 +59,6 @@ public class QuizMainActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), RecordMainActivity.class));
             }
         });
-
-        // reset quiz attempt allowed
-        try{
-            String savedDate = sharedPreferences.getString(SAVED_DATE, "1-1-1990");
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-            Date oldDate = sdf.parse(savedDate);
-
-            Date newDate = sdf.parse(new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date()));
-
-            if(oldDate.compareTo(newDate) < 0){
-                sharedPreferences.edit().putInt(QUIZ_ATTEMPT_ALLOWED, quizAttemptAllowed).apply();
-            }
-
-            sharedPreferences.edit().putString(SAVED_DATE, new SimpleDateFormat("dd-MM-yyyy").format(newDate)).apply();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
     }
 
     @Override

@@ -30,11 +30,18 @@ import com.example.parentalapp.reward.RewardMainActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
+import static com.example.parentalapp.admin.PinActivity.PASSWORD;
+import static com.example.parentalapp.quiz.QuizMainActivity.QUIZ_ATTEMPT_ALLOWED;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String ACTIVE_TIME_SERVICE = "active_time_service";
     public static final String EXIT = "exit";
+    public static final String SAVED_DATE = "saved_date";
+    public static final int quizAttemptAllowed = 5;
 
     private SharedPreferences sharedPreferences;
     private TimeSettingHelper timeSettingHelper;
@@ -58,6 +65,26 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        // reset quiz attempt allowed
+        try{
+            String savedDate = sharedPreferences.getString(SAVED_DATE, "1-1-1990");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            Date oldDate = sdf.parse(savedDate);
+
+            Date newDate = sdf.parse(new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date()));
+
+            if(oldDate.compareTo(newDate) < 0){
+                sharedPreferences.edit().putInt(QUIZ_ATTEMPT_ALLOWED, quizAttemptAllowed).apply();
+                // TODO: stack time or set time decision
+                timeSettingHelper.setRemainingScreenTime(14400);
+            }
+
+            sharedPreferences.edit().putString(SAVED_DATE, new SimpleDateFormat("dd-MM-yyyy").format(newDate)).apply();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         if(getIntent().getBooleanExtra(EXIT, false)){
             finish();
             System.exit(0);
@@ -84,6 +111,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        // actions for the application's first run
+        if(sharedPreferences.getBoolean("first_run", true)){
+            sharedPreferences.edit().putString(PASSWORD, "1234").apply();
+            timeSettingHelper.setActiveHourStart(6);
+            timeSettingHelper.setActiveMinuteStart(0);
+            timeSettingHelper.setActiveHourEnd(23);
+            timeSettingHelper.setActiveMinuteEnd(59);
+            sharedPreferences.edit().putBoolean("first_run", false).apply();
+            timeSettingHelper.setRemainingScreenTime(14400);
+        }
+
+        // Checks if the time service is active
         if(sharedPreferences.getBoolean(ACTIVE_TIME_SERVICE, false)){
             startActivity(new Intent (getApplicationContext(), PlaygroundActivity.class));
         }
