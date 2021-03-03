@@ -25,19 +25,19 @@
         android:id="@+id/button_startTimer"
         android:layout_width="329dp"
         android:layout_height="81dp"
-        android:paddingLeft="30dip"
-        android:paddingRight="26dip"
         android:background="@drawable/card_green"
         android:drawableLeft="@drawable/sports_esports_black_18dp"
         android:drawablePadding="2dip"
         android:onClick="startTimerService"
+        android:paddingLeft="30dip"
+        android:paddingRight="26dip"
         android:text="Enjoy your leisure time!"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.109" />
+        app:layout_constraintVertical_bias="0.1" />
 
     <Button
         android:id="@+id/button_adminLogin"
@@ -53,43 +53,41 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_launchquiz"
-        app:layout_constraintVertical_bias="0.142" />
+        app:layout_constraintTop_toBottomOf="@+id/button_launchReward"
+        app:layout_constraintVertical_bias="0.1" />
 
     <Button
         android:id="@+id/button_launchquiz"
         android:layout_width="329dp"
         android:layout_height="81dp"
+        android:background="@drawable/card_green_2"
+        android:drawableLeft="@drawable/school_24px"
         android:paddingLeft="30dip"
         android:paddingRight="26dip"
-        android:drawableLeft="@drawable/school_24px"
         android:text="Quiz Library"
         android:textAllCaps="false"
-        android:background="@drawable/card_green_2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_startTimer"
-        app:layout_constraintVertical_bias="0.077" />
+        app:layout_constraintVertical_bias="0.043" />
 
     <Button
         android:id="@+id/button_launchReward"
         android:layout_width="329dp"
         android:layout_height="81dp"
-        android:paddingLeft="30dip"
-        android:paddingRight="26dip"
+        android:background="@drawable/card_green_4"
         android:drawableLeft="@drawable/reward_24px"
         android:drawablePadding="2dip"
+        android:paddingLeft="30dip"
+        android:paddingRight="26dip"
         android:text="Reward Store"
         android:textAllCaps="false"
-        android:background="@drawable/card_green_4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_adminLogin"
-        app:layout_constraintVertical_bias="0.29" />
+        app:layout_constraintTop_toBottomOf="@+id/button_launchquiz"
+        app:layout_constraintVertical_bias="0.065" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
