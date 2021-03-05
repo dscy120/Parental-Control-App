@@ -24,7 +24,7 @@ public class PinActivity extends AppCompatActivity {
 
     private SharedPreferences sharedPreferences;
     private EditText editText_pin;
-    private Button button_confirm;
+    private Button button_confirm, button_forgort_password;
     private boolean back = false;
 
     @Override
@@ -40,9 +40,9 @@ public class PinActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        editText_pin = (EditText)findViewById(R.id.editTextNumber);
+        editText_pin = findViewById(R.id.editTextNumber);
 
-        button_confirm = (Button)findViewById(R.id.button_confirm);
+        button_confirm = findViewById(R.id.button_confirm);
         button_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,6 +52,14 @@ public class PinActivity extends AppCompatActivity {
                 }else{
                     Toast.makeText(getApplicationContext(),"Wrong pin",Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        button_forgort_password = findViewById(R.id.button_forget_password);
+        button_forgort_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), SecurityQuestionActivity.class));
             }
         });
 

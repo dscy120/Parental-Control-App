@@ -15,16 +15,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.parentalapp.MainActivity;
 import com.example.parentalapp.R;
 
 import static com.example.parentalapp.admin.PinActivity.PASSWORD;
+import static com.example.parentalapp.admin.SecurityQuestionActivity.SECURITY_CHECK;
 
 public class ChangePasswordActivity extends AppCompatActivity {
 
+    public static final String SECURITY_QUESTION = "security_question";
+    public static final String SECURITY_ANSWER = "security_answer";
+
     private SharedPreferences sharedPreferences;
-    private EditText editTextCurrent, editTextNew;
-    private Button buttonConfirm;
+    private EditText editTextCurrent, editTextNew, editTextSecurityQuestion, editTextSecurityAnswer;
+    private Button buttonConfirmPassword, buttonConfirmQuestion;
     private boolean back = false;
 
     @Override
@@ -41,13 +44,35 @@ public class ChangePasswordActivity extends AppCompatActivity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         editTextCurrent = findViewById(R.id.editText_current_password);
+        try{
+            if(getIntent().getExtras().getBoolean(SECURITY_CHECK)){
+                editTextCurrent.setText(sharedPreferences.getString(PASSWORD, "1234"));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         editTextNew = findViewById(R.id.editText_new_password);
 
-        buttonConfirm = findViewById(R.id.button_confirm_change_password);
-        buttonConfirm.setOnClickListener(new View.OnClickListener() {
+        buttonConfirmPassword = findViewById(R.id.button_confirm_change_password);
+        buttonConfirmPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 savePassword();
+            }
+        });
+
+        editTextSecurityQuestion = findViewById(R.id.editText_security_question);
+        editTextSecurityQuestion.setText(sharedPreferences.getString(SECURITY_QUESTION, ""));
+
+        editTextSecurityAnswer = findViewById(R.id.editText_security_answer);
+        editTextSecurityAnswer.setText(sharedPreferences.getString(SECURITY_ANSWER, ""));
+
+        buttonConfirmQuestion = findViewById(R.id.button_change_security_answer);
+        buttonConfirmQuestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveSecurityAnswer();
             }
         });
     }
@@ -97,5 +122,13 @@ public class ChangePasswordActivity extends AppCompatActivity {
         }else{
             Toast.makeText(this, "The current password is wrong.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void saveSecurityAnswer(){
+        String securityQuestion = editTextSecurityQuestion.getText().toString();
+        String securityAnswer = editTextSecurityAnswer.getText().toString();
+        sharedPreferences.edit().putString(SECURITY_QUESTION, securityQuestion).apply();
+        sharedPreferences.edit().putString(SECURITY_ANSWER, securityAnswer).apply();
+        Toast.makeText(this, "Security question saved.", Toast.LENGTH_SHORT).show();
     }
 }
