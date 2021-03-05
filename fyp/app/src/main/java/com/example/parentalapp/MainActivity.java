@@ -76,8 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
             if(oldDate.compareTo(newDate) < 0){
                 sharedPreferences.edit().putInt(QUIZ_ATTEMPT_ALLOWED, quizAttemptAllowed).apply();
-                // TODO: stack time or set time decision
-                timeSettingHelper.setRemainingScreenTime(14400);
+                timeSettingHelper.setRemainingScreenTime(7200);
             }
 
             sharedPreferences.edit().putString(SAVED_DATE, new SimpleDateFormat("dd-MM-yyyy").format(newDate)).apply();
