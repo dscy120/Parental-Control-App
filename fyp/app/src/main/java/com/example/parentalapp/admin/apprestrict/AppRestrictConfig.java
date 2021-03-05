@@ -49,7 +49,7 @@ public class AppRestrictConfig {
         for(ResolveInfo r : pkgAppsList){
             ActivityInfo a = r.activityInfo;
             String appname = pm.getApplicationLabel(a.applicationInfo).toString();
-            if (sharedPreferences.getBoolean(appname, false) == allow){
+            if (sharedPreferences.getBoolean(appname, false) == allow && appname.compareTo("Settings") != 0){
                 newList.add(r);
             }
         }
