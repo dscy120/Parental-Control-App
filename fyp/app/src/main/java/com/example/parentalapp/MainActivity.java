@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String ACTIVE_TIME_SERVICE = "active_time_service";
     public static final String EXIT = "exit";
     public static final String SAVED_DATE = "saved_date";
-    public static final int quizAttemptAllowed = 5;
+    public static final int quizAttemptAllowed = 7;
 
     private SharedPreferences sharedPreferences;
     private TimeSettingHelper timeSettingHelper;
