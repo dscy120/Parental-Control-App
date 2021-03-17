@@ -3,6 +3,7 @@ package com.example.parentalapp.admin.rewarditem;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ public class DeleteRewardDialog extends AppCompatDialogFragment {
                         // delete item
                         if(deleteItem(getArguments().getInt(RewardDBHelper.REWARD_ITEM_ID))){
                             Toast.makeText(getActivity(), "Item deleted", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getContext(), RewardItemConfigActivity.class));
                         }else{
                             Toast.makeText(getActivity(), "Unable to delete item", Toast.LENGTH_SHORT).show();
                         }

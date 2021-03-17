@@ -132,9 +132,10 @@ public class RewardItemConfigActivity extends AppCompatActivity implements Rewar
     }
 
     @Override
-    protected void onRestart() {
-        super.onRestart();
+    protected void onResume() {
+        super.onResume();
         // refresh the list
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -154,7 +155,7 @@ public class RewardItemConfigActivity extends AppCompatActivity implements Rewar
         final UnresolvedReward unresolvedReward = unresolvedRewardList.get(position);
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setTitle("Resolve Item")
-                .setMessage("Do you want to resolve this item")
+                .setMessage("Do you want to resolve this item?")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
