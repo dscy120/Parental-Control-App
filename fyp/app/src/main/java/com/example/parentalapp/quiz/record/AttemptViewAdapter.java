@@ -54,10 +54,14 @@ public class AttemptViewAdapter extends RecyclerView.Adapter<AttemptViewAdapter.
     @Override
     public void onBindViewHolder(@NonNull AttemptViewAdapter.AttemptViewHolder holder, int position) {
         AttemptDetail currentItem = AttemptList.get(position);
+        String correct = "No";
+        if(currentItem.getScore() > 0){
+            correct = "Yes";
+        }
 
         holder.question.setText(String.valueOf(currentItem.getQuestionId()));
         holder.attemptAnswer.setText(String.valueOf(currentItem.getAttemptAnswer()));
-        holder.correctAnswer.setText(String.valueOf(currentItem.getCorrectAnswer()));
+        holder.correctAnswer.setText(correct);
         holder.explanation.setText(String.valueOf(currentItem.getExplanation()));
     }
 
