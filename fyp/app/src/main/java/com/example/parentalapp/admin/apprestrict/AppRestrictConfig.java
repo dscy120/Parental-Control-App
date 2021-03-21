@@ -49,7 +49,8 @@ public class AppRestrictConfig {
         for(ResolveInfo r : pkgAppsList){
             ActivityInfo a = r.activityInfo;
             String appname = pm.getApplicationLabel(a.applicationInfo).toString();
-            if (sharedPreferences.getBoolean(appname, false) == allow && appname.compareTo("Settings") != 0){
+            if (sharedPreferences.getBoolean(appname, false) == allow && appname.compareTo("Settings") != 0
+            && sharedPreferences.getBoolean(appname, false) == allow && appname.compareTo("Google Play Store") != 0){
                 newList.add(r);
             }
         }
