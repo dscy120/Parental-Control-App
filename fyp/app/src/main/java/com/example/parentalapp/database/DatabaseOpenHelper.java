@@ -1,3 +1,4 @@
+// To connect or create local database
 package com.example.parentalapp.database;
 
 import android.content.ContentValues;

@@ -1,3 +1,4 @@
+// Reward Detail page
 package com.example.parentalapp.reward.apprestrict;
 
 import androidx.appcompat.app.ActionBar;

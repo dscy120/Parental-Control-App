@@ -1,3 +1,4 @@
+// Question Bank page
 package com.example.parentalapp.admin.questionbank;
 
 import androidx.appcompat.app.ActionBar;

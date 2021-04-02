@@ -1,3 +1,4 @@
+// Confirm dialog when starting a quiz session
 package com.example.parentalapp.quiz;
 
 import android.app.Activity;
@@ -54,7 +55,7 @@ public class SelectConfirmDialog extends AppCompatDialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if(questions.size() <= 0){
-                            Toast.makeText(getContext(), "There is no questions available.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "There are no questions available.", Toast.LENGTH_SHORT).show();
                         }else{
                             listener.startQuiz();
                         }

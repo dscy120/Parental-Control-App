@@ -1,4 +1,6 @@
-// Main page
+// Author: So Ching Yiu
+
+// Home page of application
 package com.example.parentalapp;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -98,8 +100,9 @@ public class MainActivity extends AppCompatActivity {
         // disable recent apps button
         ActivityManager activityManager = (ActivityManager) getApplicationContext()
                 .getSystemService(Context.ACTIVITY_SERVICE);
-
         activityManager.moveTaskToFront(getTaskId(), 0);
+
+        // transition animation direction
         if(!back){
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }else{

@@ -1,4 +1,5 @@
-// Foreground Service that keeps track of the remaining screen time of user
+// Background Service that keeps track of the remaining screen time of user
+// Remaining time is shown in notification bar
 package com.example.parentalapp.playground;
 
 import android.app.Notification;
