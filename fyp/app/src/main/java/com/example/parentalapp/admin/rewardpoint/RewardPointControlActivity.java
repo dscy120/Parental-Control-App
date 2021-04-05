@@ -1,3 +1,4 @@
+// Page to add or deduct reward points
 package com.example.parentalapp.admin.rewardpoint;
 
 import androidx.appcompat.app.ActionBar;

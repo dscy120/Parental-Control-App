@@ -1,3 +1,4 @@
+// Control remaining screen time and active hour of child user
 package com.example.parentalapp.admin.screentime;
 
 import android.app.ActivityManager;

@@ -1,4 +1,5 @@
-// Question Bank page
+// Question Bank main page
+// Download or remove exercises in quiz module
 package com.example.parentalapp.admin.questionbank;
 
 import androidx.appcompat.app.ActionBar;

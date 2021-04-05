@@ -1,3 +1,5 @@
+// Parent setting main page
+// Configure parameters of other modules
 package com.example.parentalapp.admin;
 
 import android.app.ActivityManager;

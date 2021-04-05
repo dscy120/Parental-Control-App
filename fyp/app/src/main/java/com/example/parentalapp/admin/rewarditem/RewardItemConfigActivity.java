@@ -1,3 +1,5 @@
+// Configure reward item list, add or delete custom item
+// Includes an unresolved list
 package com.example.parentalapp.admin.rewarditem;
 
 import androidx.appcompat.app.ActionBar;

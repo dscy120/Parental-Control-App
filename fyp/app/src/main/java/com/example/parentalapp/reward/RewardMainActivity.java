@@ -1,3 +1,5 @@
+// Reward store main page
+// For child user to exchange rewards using reward points
 package com.example.parentalapp.reward;
 
 import androidx.appcompat.app.ActionBar;

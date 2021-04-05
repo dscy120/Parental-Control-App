@@ -1,4 +1,5 @@
-// Desktop for accessing games and other entertainment apps
+// Page for accessing games and other entertainment apps
+// Subject to screen time control
 package com.example.parentalapp.playground;
 
 import androidx.appcompat.app.AppCompatActivity;

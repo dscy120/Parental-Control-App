@@ -1,3 +1,6 @@
+// Quiz Main Page
+// For child user to perform self-learning
+// Includes exercises and record of past attempts
 package com.example.parentalapp.quiz;
 
 import androidx.appcompat.app.ActionBar;

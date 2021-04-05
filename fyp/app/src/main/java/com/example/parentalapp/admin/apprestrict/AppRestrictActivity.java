@@ -1,3 +1,4 @@
+// Setting to add or remove application shortcut from playground module
 package com.example.parentalapp.admin.apprestrict;
 
 import android.app.ActivityManager;
